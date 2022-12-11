@@ -4,9 +4,15 @@ import {LandingPageContainerComponent} from "./containers/landing-page-container
 
 const routes: Routes = [
   {
+    path: 'pets',
+    loadChildren: () => import('./pets/pets.module').then((module) => module.PetsModule),
+    title: 'your pets'
+  },
+  {
     path: '',
     pathMatch: 'full',
     component: LandingPageContainerComponent,
+    title: 'raisin\' pets'
   },
   {
     path: '**',

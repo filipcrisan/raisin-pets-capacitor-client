@@ -1,6 +1,5 @@
 import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-
 import {AppComponent} from './app.component';
 import {RouterOutlet} from "@angular/router";
 import {AppRoutingModule} from "./app-routing.module";
@@ -12,7 +11,9 @@ import {StoreDevtoolsModule} from "@ngrx/store-devtools";
 import {environment} from "../environments/environment";
 import {AuthFacades} from "./facades/auth.facades";
 import {AuthService} from "./services/auth.service";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {AuthGuard} from "./guards/auth.guard";
+import {AuthInterceptorService} from "./services/auth-interceptor.service";
 
 export function initializeApp(appInitializerService: AppInitializerService) {
   return () => appInitializerService.init();
@@ -43,17 +44,24 @@ const FACADES = [
       name: 'NgRx raisin pets',
       maxAge: 25,
       logOnly: environment.production
-    })
+    }),
   ],
   providers: [
     FACADES,
+    AppInitializerService,
     {
       provide: APP_INITIALIZER,
       useFactory: initializeApp,
       deps: [AppInitializerService],
       multi: true
     },
-    AuthService
+    AuthService,
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
