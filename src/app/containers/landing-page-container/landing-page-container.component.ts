@@ -1,5 +1,5 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {GoogleLoginProvider, SocialAuthService, SocialUser} from "@abacritt/angularx-social-login";
+import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {GoogleAuth} from "@codetrix-studio/capacitor-google-auth";
 
 @Component({
   selector: 'app-landing-page-container',
@@ -7,26 +7,10 @@ import {GoogleLoginProvider, SocialAuthService, SocialUser} from "@abacritt/angu
   styleUrls: ['./landing-page-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LandingPageContainerComponent implements OnInit {
-  constructor(private authService: SocialAuthService) {
-  }
+export class LandingPageContainerComponent {
+  googleUser: any;
 
-  ngOnInit(): void {
-    // do this in the app initializer, and update redux with the user
-    // the guard will check in redux
-    // upon logout, erase from redux
-    this.authService.authState.subscribe((user) => {
-      console.log(user);
-    });
-  }
-
-  signInWithGoogle(): void {
-    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then((user: SocialUser) => {
-      console.log(user);
-    });
-  }
-
-  signOut(): void {
-    this.authService.signOut();
+  async signInWithGoogle() {
+    this.googleUser = await GoogleAuth.signIn();
   }
 }
