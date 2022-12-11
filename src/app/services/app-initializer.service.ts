@@ -10,7 +10,7 @@ export class AppInitializerService {
     GoogleAuth.initialize({
       clientId: environment.angularGoogleClientId,
       scopes: ['profile', 'email'],
-      grantOfflineAccess: true
+      grantOfflineAccess: true,
     })
   }
 }
