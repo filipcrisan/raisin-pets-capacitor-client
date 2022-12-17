@@ -18,4 +18,8 @@ export class AuthService {
   logout(): Observable<any> {
     return this.httpClient.put(`${this.apiUrl}/logout`, null);
   }
+
+  test(): Observable<any> {
+    return this.httpClient.get<any>(`${this.apiUrl}/test`);
+  }
 }

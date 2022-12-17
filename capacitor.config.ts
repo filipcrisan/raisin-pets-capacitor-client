@@ -8,11 +8,11 @@ const config: CapacitorConfig = {
   plugins: {
     GoogleAuth: {
       scopes: ['profile', 'email'],
-      serverClientId: '934410184091-c2c7tavjvscau815l48a7uemu1c26fam.apps.googleusercontent.com',
+      androidClientId: '934410184091-v2meq8n5viva9m212v5h0urutmbfj51q.apps.googleusercontent.com',
       iosClientId: '934410184091-hcbtachkju0mm550j2dpv2qp5fpcddm1.apps.googleusercontent.com',
       forceCodeForRefreshToken: true
     }
-  }
+  },
 };
 
 export default config;

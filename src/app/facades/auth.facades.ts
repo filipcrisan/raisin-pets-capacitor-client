@@ -7,10 +7,16 @@ import {AuthService} from "../services/auth.service";
 import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
+import {authQuery} from "../reducers/auth.selector";
 
 @UntilDestroy()
 @Injectable()
 export class AuthFacades {
+  query = {
+    user$: this.store.select(authQuery.getUser),
+    loaded$: this.store.select(authQuery.getLoaded)
+  };
+
   constructor(
     private store: Store<State>,
     private authService: AuthService,

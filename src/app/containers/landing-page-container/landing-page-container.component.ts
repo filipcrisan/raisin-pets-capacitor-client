@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {GoogleAuth} from "@codetrix-studio/capacitor-google-auth";
 import {AuthFacades} from "../../facades/auth.facades";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-landing-page-container',
@@ -9,10 +9,18 @@ import {AuthFacades} from "../../facades/auth.facades";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LandingPageContainerComponent {
-  constructor(private googleAuthFacades: AuthFacades) {
+  response: any;
+
+  constructor(private authFacades: AuthFacades, private authService: AuthService) {
   }
 
   signInWithGoogle(): void {
-    this.googleAuthFacades.login();
+    this.authFacades.login();
+  }
+
+  test(): void {
+    this.authService.test().subscribe((x) => {
+      this.response = x;
+    });
   }
 }
