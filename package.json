@@ -23,7 +23,6 @@
     "@capacitor/core": "^4.6.1",
     "@capacitor/ios": "^4.5.0",
     "@codetrix-studio/capacitor-google-auth": "^3.2.0",
-    "@jcesarmobile/ssl-skip": "^0.2.0",
     "@ngneat/until-destroy": "^9.2.2",
     "@ngrx/store": "^15.0.0",
     "@ngrx/store-devtools": "^15.0.0",

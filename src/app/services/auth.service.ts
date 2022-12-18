@@ -13,6 +13,8 @@ export class AuthService {
   }
 
   login(token: string): Observable<User> {
+    // we have to use CapacitorHttp as a first anonymous API call, in order to get rid of the Unknown Error
+    // subsequent calls can use the Angular's HttpClient normally so that the interceptor works as well
     const options: HttpOptions = {
       url: `${this.apiUrl}/login`,
       params: {
@@ -24,20 +26,6 @@ export class AuthService {
   }
 
   logout(): Observable<any> {
-    // const options: HttpOptions = {
-    //   url: `${this.apiUrl}/logout`
-    // };
-    //
-    // return from(CapacitorHttp.put(options).then((httpResponse) => httpResponse.data));
-
     return this.http.put<any>(`${this.apiUrl}/logout`, null);
-  }
-
-  test(): Observable<any> {
-    const options: HttpOptions = {
-      url: `${this.apiUrl}/test?token=Bearer`
-    };
-
-    return from(CapacitorHttp.get(options));
   }
 }
