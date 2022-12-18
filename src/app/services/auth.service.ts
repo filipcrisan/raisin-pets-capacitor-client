@@ -1,25 +1,43 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {from, Observable} from "rxjs";
 import {User} from "../models/user.model";
 import {environment} from "../../environments/environment";
+import {CapacitorHttp, HttpOptions} from "@capacitor/core";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable()
 export class AuthService {
   apiUrl = `${environment.apiUrl}/users`;
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private http: HttpClient) {
   }
 
   login(token: string): Observable<User> {
-    return this.httpClient.put<User>(`${this.apiUrl}/login?token=Bearer ${token}`, null);
+    const options: HttpOptions = {
+      url: `${this.apiUrl}/login`,
+      params: {
+        token: `Bearer ${token}`
+      }
+    };
+
+    return from(CapacitorHttp.put(options).then((httpResponse) => (httpResponse.data as User)));
   }
 
   logout(): Observable<any> {
-    return this.httpClient.put(`${this.apiUrl}/logout`, null);
+    // const options: HttpOptions = {
+    //   url: `${this.apiUrl}/logout`
+    // };
+    //
+    // return from(CapacitorHttp.put(options).then((httpResponse) => httpResponse.data));
+
+    return this.http.put<any>(`${this.apiUrl}/logout`, null);
   }
 
   test(): Observable<any> {
-    return this.httpClient.get<any>(`${this.apiUrl}/test`);
+    const options: HttpOptions = {
+      url: `${this.apiUrl}/test?token=Bearer`
+    };
+
+    return from(CapacitorHttp.get(options));
   }
 }

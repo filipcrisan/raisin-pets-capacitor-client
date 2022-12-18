@@ -13,6 +13,9 @@ const config: CapacitorConfig = {
       forceCodeForRefreshToken: true
     }
   },
+  server: {
+    cleartext: true, // needed for android
+  },
 };
 
 export default config;
