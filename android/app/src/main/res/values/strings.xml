@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
-    <string name="app_name">raisin-pets-capacitor-client</string>
-    <string name="title_activity_main">raisin-pets-capacitor-client</string>
-    <string name="package_name">com.raisinpets.app</string>
-    <string name="custom_url_scheme">com.raisinpets.app</string>
-</resources>
