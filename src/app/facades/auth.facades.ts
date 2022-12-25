@@ -1,28 +1,27 @@
-import {Injectable} from "@angular/core";
-import {Store} from "@ngrx/store";
-import {State} from "../reducers/auth.reducer";
-import {GoogleAuth} from "@codetrix-studio/capacitor-google-auth";
-import {AuthActions} from "../actions";
-import {AuthService} from "../services/auth.service";
-import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
-import {HttpErrorResponse} from "@angular/common/http";
-import {Router} from "@angular/router";
-import {authQuery} from "../reducers/auth.selector";
+import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { State } from '../reducers/auth.reducer';
+import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
+import { AuthActions } from '../actions';
+import { AuthService } from '../services/auth.service';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { authQuery } from '../reducers/auth.selector';
 
 @UntilDestroy()
 @Injectable()
 export class AuthFacades {
   query = {
     user$: this.store.select(authQuery.getUser),
-    loaded$: this.store.select(authQuery.getLoaded)
+    loaded$: this.store.select(authQuery.getLoaded),
   };
 
   constructor(
     private store: Store<State>,
     private authService: AuthService,
     private router: Router
-  ) {
-  }
+  ) {}
 
   login(): void {
     GoogleAuth.signIn()
@@ -56,15 +55,16 @@ export class AuthFacades {
 
     const token = this.getBearerToken();
 
-    this.authService.login(token)
+    this.authService
+      .login(token)
       .pipe(untilDestroyed(this))
       .subscribe({
         next: (user) => {
-          this.store.dispatch(AuthActions.loadUserSuccess({user}));
+          this.store.dispatch(AuthActions.loadUserSuccess({ user }));
         },
         error: (error: HttpErrorResponse) => {
-          this.store.dispatch(AuthActions.loadUserFailure({error}));
-        }
+          this.store.dispatch(AuthActions.loadUserFailure({ error }));
+        },
       });
   }
 
@@ -79,29 +79,31 @@ export class AuthFacades {
   }
 
   isTokenExpired(token: string): boolean {
-    const expiry = (JSON.parse(atob(token.split('.')[1]))).exp;
-    return (Math.floor((new Date).getTime() / 1000)) >= expiry;
+    const expiry = JSON.parse(atob(token.split('.')[1])).exp;
+    return Math.floor(new Date().getTime() / 1000) >= expiry;
   }
 
   //#region Private methods
 
   private onGoogleSignIn(token: string): void {
-    this.authService.login(token)
+    this.authService
+      .login(token)
       .pipe(untilDestroyed(this))
       .subscribe({
         next: (user) => {
           localStorage.setItem('token', token);
-          this.store.dispatch(AuthActions.loadUserSuccess({user}));
+          this.store.dispatch(AuthActions.loadUserSuccess({ user }));
           this.router.navigate(['pets']).then();
         },
         error: (error: HttpErrorResponse) => {
-          this.store.dispatch(AuthActions.loadUserFailure({error}));
-        }
+          this.store.dispatch(AuthActions.loadUserFailure({ error }));
+        },
       });
   }
 
   private onGoogleSignOut(): void {
-    this.authService.logout()
+    this.authService
+      .logout()
       .pipe(untilDestroyed(this))
       .subscribe({
         next: () => {
@@ -110,14 +112,15 @@ export class AuthFacades {
         },
         error: (error: HttpErrorResponse) => {
           console.log(error);
-        }
+        },
       });
   }
 
   private onGoogleSignInOfLoggedInUser(token: string): void {
     GoogleAuth.signOut()
       .then(() => {
-        this.authService.logout()
+        this.authService
+          .logout()
           .pipe(untilDestroyed(this))
           .subscribe({
             next: () => {
@@ -126,7 +129,7 @@ export class AuthFacades {
             },
             error: (error: HttpErrorResponse) => {
               console.log(error);
-            }
+            },
           });
       })
       .catch((error) => {

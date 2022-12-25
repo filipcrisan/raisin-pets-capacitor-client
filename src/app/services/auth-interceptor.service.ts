@@ -1,15 +1,11 @@
-import {Injectable} from '@angular/core';
-import {HttpHandler, HttpRequest} from "@angular/common/http";
-import {AuthFacades} from "../facades/auth.facades";
-import {Router} from "@angular/router";
+import { Injectable } from '@angular/core';
+import { HttpHandler, HttpRequest } from '@angular/common/http';
+import { AuthFacades } from '../facades/auth.facades';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthInterceptorService {
-  constructor(
-    private authFacades: AuthFacades,
-    private router: Router
-  ) {
-  }
+  constructor(private authFacades: AuthFacades, private router: Router) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     const token = this.authFacades.getBearerToken();
@@ -24,7 +20,7 @@ export class AuthInterceptorService {
     }
 
     const authRequest = req.clone({
-      headers: req.headers.set('Authorization', `Bearer ${token}`)
+      headers: req.headers.set('Authorization', `Bearer ${token}`),
     });
 
     return next.handle(authRequest);

@@ -1,18 +1,19 @@
-import {RouterModule, Routes} from "@angular/router";
-import {NgModule} from "@angular/core";
-import {LandingPageContainerComponent} from "./containers/landing-page-container/landing-page-container.component";
+import { RouterModule, Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { LandingPageContainerComponent } from './containers/landing-page-container/landing-page-container.component';
 
 const routes: Routes = [
   {
     path: 'pets',
-    loadChildren: () => import('./pets/pets.module').then((module) => module.PetsModule),
-    title: 'your pets'
+    loadChildren: () =>
+      import('./pets/pets.module').then((module) => module.PetsModule),
+    title: 'your pets',
   },
   {
     path: '',
     pathMatch: 'full',
     component: LandingPageContainerComponent,
-    title: 'raisin\' pets'
+    title: "raisin' pets",
   },
   {
     path: '**',
@@ -22,7 +23,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule {}

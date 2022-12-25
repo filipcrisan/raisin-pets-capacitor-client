@@ -1,33 +1,30 @@
-import {APP_INITIALIZER, NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
-import {AppComponent} from './app.component';
-import {RouterOutlet} from "@angular/router";
-import {AppRoutingModule} from "./app-routing.module";
-import {LandingPageContainerComponent} from './containers/landing-page-container/landing-page-container.component';
-import {AppInitializerService} from "./services/app-initializer.service";
-import {StoreModule} from "@ngrx/store";
-import {metaReducers, ROOT_REDUCERS} from "./reducers";
-import {StoreDevtoolsModule} from "@ngrx/store-devtools";
-import {environment} from "../environments/environment";
-import {AuthFacades} from "./facades/auth.facades";
-import {AuthService} from "./services/auth.service";
-import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import {AuthGuard} from "./guards/auth.guard";
-import {AuthInterceptorService} from "./services/auth-interceptor.service";
+import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppComponent } from './app.component';
+import { RouterOutlet } from '@angular/router';
+import { AppRoutingModule } from './app-routing.module';
+import { LandingPageContainerComponent } from './containers/landing-page-container/landing-page-container.component';
+import { AppInitializerService } from './services/app-initializer.service';
+import { StoreModule } from '@ngrx/store';
+import { metaReducers, ROOT_REDUCERS } from './reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { AuthFacades } from './facades/auth.facades';
+import { AuthService } from './services/auth.service';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthGuard } from './guards/auth.guard';
+import { AuthInterceptorService } from './services/auth-interceptor.service';
 
 export function initializeApp(appInitializerService: AppInitializerService) {
   return () => appInitializerService.init();
 }
 
-const FACADES = [
-  AuthFacades
-];
+const FACADES = [AuthFacades];
+
+const SERVICES = [AppInitializerService, AuthService, AuthGuard];
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LandingPageContainerComponent
-  ],
+  declarations: [AppComponent, LandingPageContainerComponent],
   imports: [
     AppRoutingModule,
     BrowserModule,
@@ -37,33 +34,30 @@ const FACADES = [
       metaReducers,
       runtimeChecks: {
         strictStateImmutability: true,
-        strictActionImmutability: true
-      }
+        strictActionImmutability: true,
+      },
     }),
     StoreDevtoolsModule.instrument({
       name: 'NgRx raisin pets',
       maxAge: 25,
-      logOnly: environment.production
+      logOnly: environment.production,
     }),
   ],
   providers: [
     FACADES,
-    AppInitializerService,
+    SERVICES,
     {
       provide: APP_INITIALIZER,
       useFactory: initializeApp,
       deps: [AppInitializerService],
-      multi: true
+      multi: true,
     },
-    AuthService,
-    AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
-      multi: true
-    }
+      multi: true,
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}
