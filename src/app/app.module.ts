@@ -14,6 +14,8 @@ import { AuthService } from './services/auth.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './guards/auth.guard';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedModule } from './shared/shared.module';
 
 export function initializeApp(appInitializerService: AppInitializerService) {
   return () => appInitializerService.init();
@@ -42,6 +44,8 @@ const SERVICES = [AppInitializerService, AuthService, AuthGuard];
       maxAge: 25,
       logOnly: environment.production,
     }),
+    BrowserAnimationsModule,
+    SharedModule.forRoot(),
   ],
   providers: [
     FACADES,
