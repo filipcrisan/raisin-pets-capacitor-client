@@ -1,4 +1,4 @@
-import {CapacitorConfig} from '@capacitor/cli';
+import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'com.raisinpets.app',
@@ -8,9 +8,13 @@ const config: CapacitorConfig = {
   plugins: {
     GoogleAuth: {
       scopes: ['profile', 'email'],
-      iosClientId: '934410184091-hcbtachkju0mm550j2dpv2qp5fpcddm1.apps.googleusercontent.com',
-      forceCodeForRefreshToken: true
-    }
+      iosClientId:
+        '934410184091-hcbtachkju0mm550j2dpv2qp5fpcddm1.apps.googleusercontent.com',
+      forceCodeForRefreshToken: true,
+    },
+  },
+  ios: {
+    contentInset: 'always',
   },
 };
 
