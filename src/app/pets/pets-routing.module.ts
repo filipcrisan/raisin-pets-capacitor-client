@@ -2,17 +2,20 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { PetsPageComponent } from './containers/pets-page/pets-page.component';
 import { AuthGuard } from '../guards/auth.guard';
+import { PetsListContainerComponent } from './containers/pets-list-container/pets-list-container.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'list',
-    pathMatch: 'full',
-  },
-  {
-    path: 'list',
     component: PetsPageComponent,
     canActivate: [AuthGuard],
+    children: [
+      { path: '', pathMatch: 'full', redirectTo: 'list' },
+      {
+        path: 'list',
+        component: PetsListContainerComponent,
+      },
+    ],
   },
 ];
 
