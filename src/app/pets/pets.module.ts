@@ -8,6 +8,7 @@ import { PetsService } from './services/pets.service';
 import { PetsFacades } from './facades/pets.facades';
 import { featureKey, reducers } from './reducers';
 import { StoreModule } from '@ngrx/store';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { StoreModule } from '@ngrx/store';
   imports: [
     CommonModule,
     PetsRoutingModule,
+    SharedModule,
     StoreModule.forFeature(featureKey, reducers),
   ],
   providers: [PetsFacades, PetsService],
