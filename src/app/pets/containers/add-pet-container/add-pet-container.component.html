@@ -1,0 +1,5 @@
+<app-add-pet
+  [saving]="petsQuery.pets.saving$ | async"
+  [error]="petsQuery.pets.error$ | async"
+  (addPet)="onAddPet($event)"
+></app-add-pet>

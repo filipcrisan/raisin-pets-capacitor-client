@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
-import { environment } from "../../../environments/environment";
-import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
-import { Pet } from "../models/pet.model";
+import { Injectable } from '@angular/core';
+import { environment } from '../../../environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Pet } from '../models/pet.model';
 
 @Injectable()
 export class PetsService {
@@ -12,5 +12,9 @@ export class PetsService {
 
   getAllPets(): Observable<Pet[]> {
     return this.http.get<Pet[]>(`${this.apiUrl}/list`);
+  }
+
+  addPet(pet: Pet): Observable<Pet> {
+    return this.http.post<Pet>(this.apiUrl, pet);
   }
 }

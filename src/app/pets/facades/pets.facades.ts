@@ -15,6 +15,7 @@ export class PetsFacades {
       entities$: this.store.select(petsQuery.getPets),
       loading$: this.store.select(petsQuery.getPetsLoading),
       error$: this.store.select(petsQuery.getPetsError),
+      saving$: this.store.select(petsQuery.getPetsSaving),
     },
   };
 
@@ -32,6 +33,23 @@ export class PetsFacades {
           // TODO: add toast notification service
 
           this.store.dispatch(PetsApiActions.getAllPetsFailure({ error }));
+        },
+      })
+    );
+  }
+
+  addPet(pet: Pet): Observable<Pet> {
+    this.store.dispatch(PetsPageActions.addPet());
+
+    return this.petsService.addPet(pet).pipe(
+      tap({
+        next: (pet) => {
+          this.store.dispatch(PetsApiActions.addPetSuccess({ pet }));
+        },
+        error: (error: HttpErrorResponse) => {
+          // TODO: add toast notification service
+
+          this.store.dispatch(PetsApiActions.addPetFailure({ error }));
         },
       })
     );
