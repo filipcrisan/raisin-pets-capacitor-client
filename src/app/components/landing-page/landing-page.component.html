@@ -1,0 +1,24 @@
+<div class="flex flex-col bg-landing-page-yellow w-full h-full overflow-auto">
+  <ng-container *ngIf="!userLoading && !userError">
+    <div class="flex justify-center">
+      <img src="/assets/images/logo-raisin-purple.png" class="w-20 h-20 mt-5 mb-10">
+    </div>
+    <div class="flex flex-col justify-center items-center text-center">
+      <span class="text-2xl">show your pets that you care</span>
+      <br>
+      <span class="text-xl">to get started,</span>
+      <div class="rounded-full border-solid border-2 border-black mt-2">
+        <button (click)="onSignInWithGoogle()" class="flex mx-2 my-2 items-center justify-between">
+          <span class="mr-2">Sign in with</span>
+          <mat-icon svgIcon="google-logo"></mat-icon>
+        </button>
+      </div>
+
+      <img src="/assets/images/landing-page.gif" class="landingPageGif">
+    </div>
+  </ng-container>
+
+  <ng-container class="flex justify-center items-center w-full h-full">
+    <mat-progress-spinner *ngIf="userLoading || userError" mode="indeterminate"></mat-progress-spinner>
+  </ng-container>
+</div>

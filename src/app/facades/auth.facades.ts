@@ -8,13 +8,15 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { authQuery } from '../reducers/auth.selector';
+import { delay } from 'rxjs';
 
 @UntilDestroy()
 @Injectable()
 export class AuthFacades {
   query = {
     user$: this.store.select(authQuery.getUser),
-    loaded$: this.store.select(authQuery.getLoaded),
+    userLoading$: this.store.select(authQuery.getUserLoading),
+    userError$: this.store.select(authQuery.getUserError),
   };
 
   constructor(
@@ -55,12 +57,15 @@ export class AuthFacades {
 
     const token = this.getBearerToken();
 
+    this.store.dispatch(AuthActions.loadUser());
+
     this.authService
       .login(token)
       .pipe(untilDestroyed(this))
       .subscribe({
         next: (user) => {
           this.store.dispatch(AuthActions.loadUserSuccess({ user }));
+          this.router.navigate(['pets']).then();
         },
         error: (error: HttpErrorResponse) => {
           this.store.dispatch(AuthActions.loadUserFailure({ error }));
@@ -86,6 +91,8 @@ export class AuthFacades {
   //#region Private methods
 
   private onGoogleSignIn(token: string): void {
+    this.store.dispatch(AuthActions.loadUser());
+
     this.authService
       .login(token)
       .pipe(untilDestroyed(this))

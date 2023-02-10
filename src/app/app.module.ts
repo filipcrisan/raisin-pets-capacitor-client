@@ -16,6 +16,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
+import { LandingPageComponent } from './components/landing-page/landing-page.component';
 
 export function initializeApp(appInitializerService: AppInitializerService) {
   return () => appInitializerService.init();
@@ -26,7 +27,7 @@ const FACADES = [AuthFacades];
 const SERVICES = [AppInitializerService, AuthService, AuthGuard];
 
 @NgModule({
-  declarations: [AppComponent, LandingPageContainerComponent],
+  declarations: [AppComponent, LandingPageContainerComponent, LandingPageComponent],
   imports: [
     AppRoutingModule,
     BrowserModule,
