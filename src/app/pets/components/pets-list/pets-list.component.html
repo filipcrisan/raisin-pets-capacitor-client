@@ -1,18 +1,14 @@
-<div *ngIf="!loading && !error && pets.length">
-  <mat-list>
-    <mat-list-item *ngFor="let pet of pets">
-      <div class="flex flex-row justify-center items-center">
+<div class="flex justify-center items-center w-full h-full">
+  <div class="wrapper">
+    <div *ngFor="let pet of pets">
+      <div class="flex flex-row">
         <img [src]="getAvatarUrlOrDefault(pet)" class="w-20 h-20">
-        <span>{{pet | json}}</span>
+        <span class="text-left">{{pet | json}}</span>
       </div>
-    </mat-list-item>
-  </mat-list>
-</div>
+    </div>
+  </div>
 
-<ng-container *ngIf="loading || error" class="flex justify-center items-center w-full h-full">
-  <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
-</ng-container>
+  <mat-progress-spinner *ngIf="loading || error" mode="indeterminate" class="mt-10 m-auto"></mat-progress-spinner>
 
-<div *ngIf="!loading && !error && !pets.length">
-  <p class="text-2xl">No pets to display.</p>
+  <p *ngIf="!loading && !error && !pets.length" class="text-2xl mt-10 m-auto">No pets to display.</p>
 </div>

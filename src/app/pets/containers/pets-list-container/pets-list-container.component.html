@@ -1,11 +1,9 @@
-<div class="flex flex-col justify-center items-center bg-landing-page-yellow w-full h-full overflow-auto">
-  <div class="flex flex-col justify-center items-center text-center">
-    <div class="rounded-full border-solid border-2 border-black mt-2">
-      <button (click)="onAddPet()" class="flex mx-2 my-2 items-center justify-between">
-        <img src="assets/icons/plus.png" class="mr-2 ml-3 w-9 h-9">
-        <span class="mr-3">Add furry friend</span>
-      </button>
-    </div>
+<div class="flex flex-col justify-center items-center w-full h-full overflow-auto">
+  <div class="buttonContainer">
+    <button (click)="onAddPet()" class="flex flex-row m-1 justify-between">
+      <img src="assets/icons/plus.png" class="ml-2 w-9 h-9 m-auto">
+      <span class="ml-1 m-auto">Add furry friend</span>
+    </button>
   </div>
 
   <app-pets-list
