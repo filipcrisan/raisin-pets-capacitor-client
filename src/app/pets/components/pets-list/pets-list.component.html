@@ -1,5 +1,5 @@
 <div class="flex justify-center items-center w-full h-full">
-  <div class="wrapper">
+  <div *ngIf="!loading && !error" class="wrapper">
     <div *ngFor="let pet of pets">
       <div class="flex flex-row">
         <img [src]="getAvatarUrlOrDefault(pet)" class="w-20 h-20">

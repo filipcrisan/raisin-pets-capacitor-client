@@ -17,5 +17,9 @@ export class SvgIconsModule {
         `${this.iconsPath}/google-logo.svg`
       )
     );
+    iconRegistry.addSvgIcon(
+      'cancel',
+      sanitizer.bypassSecurityTrustResourceUrl(`${this.iconsPath}/cancel.svg`)
+    );
   }
 }

@@ -17,7 +17,7 @@ export class AddPetContainerComponent {
 
   constructor(
     private petsFacades: PetsFacades,
-    private routerExtensions: Router,
+    private router: Router,
     private activatedRoute: ActivatedRoute
   ) {}
 
@@ -28,7 +28,7 @@ export class AddPetContainerComponent {
         untilDestroyed(this),
         tap({
           next: () => {
-            this.routerExtensions
+            this.router
               .navigate(['list'], {
                 relativeTo: this.activatedRoute.parent,
               })
@@ -37,5 +37,13 @@ export class AddPetContainerComponent {
         })
       )
       .subscribe();
+  }
+
+  onCancel(): void {
+    this.router
+      .navigate(['list'], {
+        relativeTo: this.activatedRoute.parent,
+      })
+      .then();
   }
 }

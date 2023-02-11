@@ -11,6 +11,7 @@ import { StoreModule } from '@ngrx/store';
 import { SharedModule } from '../shared/shared.module';
 import { AddPetContainerComponent } from './containers/add-pet-container/add-pet-container.component';
 import { AddPetComponent } from './components/add-pet/add-pet.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { AddPetComponent } from './components/add-pet/add-pet.component';
     AddPetComponent,
   ],
   imports: [
+    ReactiveFormsModule,
     CommonModule,
     PetsRoutingModule,
     SharedModule,

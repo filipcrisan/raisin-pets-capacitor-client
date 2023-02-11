@@ -1,1 +1,59 @@
-<p>add-pet works!</p>
+<div class="flex justify-center items-center w-full h-full">
+  <div *ngIf="!saving && !error" class="w-full max-w-sm">
+    <form [formGroup]="petForm">
+      <div class="flex flex-col items-start h-full w-full">
+        <span>Name</span>
+        <mat-form-field class="w-full">
+          <input matInput formControlName="name">
+          <mat-error *ngIf="petForm.touched && petForm.controls.name.errors">
+            Name is required
+          </mat-error>
+        </mat-form-field>
+        <span>Avatar URL</span>
+        <mat-form-field class="w-full">
+          <input matInput formControlName="avatarUrl" class="bg-landing-page-yellow">
+        </mat-form-field>
+        <span>Date of birth (approx.)</span>
+        <mat-form-field appearance="fill" class="w-full">
+          <input matInput [matDatepicker]="picker" formControlName="dateOfBirth">
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <span>Species</span>
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-select formControlName="species">
+            <mat-option *ngFor="let option of speciesOptions" [value]="option.value">
+              {{option.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <span>Size</span>
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-select formControlName="size">
+            <mat-option *ngFor="let option of sizeOptions" [value]="option.value">
+              {{option.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </form>
+
+    <div class="flex flex-row justify-between items-end h-full w-full">
+      <div class="buttonContainer">
+        <button (click)="onCancel()" class="flex flex-row m-1 justify-between">
+          <mat-icon svgIcon="cancel" class="m-auto"></mat-icon>
+          <span class="ml-1 m-auto">Cancel</span>
+        </button>
+      </div>
+
+      <div class="buttonContainer">
+        <button (click)="onSave()" class="flex flex-row m-1 justify-between">
+          <img src="assets/icons/save.png" class="ml-2 w-9 h-9 m-auto">
+          <span class="ml-1 m-auto">Save details</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <mat-progress-spinner *ngIf="saving || error" mode="indeterminate" class="mt-10 m-auto"></mat-progress-spinner>
+</div>

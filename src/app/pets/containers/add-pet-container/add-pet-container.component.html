@@ -2,4 +2,5 @@
   [saving]="petsQuery.pets.saving$ | async"
   [error]="petsQuery.pets.error$ | async"
   (addPet)="onAddPet($event)"
+  (cancel)="onCancel()"
 ></app-add-pet>
