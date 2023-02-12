@@ -1,1 +1,23 @@
-<p>menu-container works!</p>
+<div class="flex flex-col text-center w-full h-full pt-2.5">
+  <div class="flex flex-row">
+    <div class="z-10">
+      <button mat-icon-button (click)="onClose()">
+        <mat-icon svgIcon="menu"></mat-icon>
+      </button>
+    </div>
+    <div class="absolute w-screen flex flex-col items-center">
+      <img src="/assets/images/logo-raisin-purple.png" class="w-10 h-10">
+    </div>
+  </div>
+  <div class="flex flex-col justify-between items-center h-full pt-2.5">
+    <ng-container *ngIf="(authQuery.userLoading$ | async) === false && (authQuery.userError$ | async) === null">
+      <p>You are currently logged in as <i>{{(authQuery.user$ | async).firstName}}</i>.</p>
+    </ng-container>
+    <div class="buttonContainer">
+      <button (click)="onLogout()" class="flex flex-row m-1 justify-between">
+        <img src="assets/icons/logout.png" class="ml-2 w-9 h-9 m-auto">
+        <span class="ml-1 m-auto">Logout</span>
+      </button>
+    </div>
+  </div>
+</div>
