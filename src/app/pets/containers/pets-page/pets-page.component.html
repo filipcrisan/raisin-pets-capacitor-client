@@ -1,4 +1,13 @@
 <div class="flex flex-col text-center w-full h-full pt-2.5">
-  <p class="text-2xl">raisin' pets</p>
+  <div class="flex flex-row">
+    <a routerLink="menu" class="z-10">
+      <button mat-icon-button>
+        <mat-icon svgIcon="menu"></mat-icon>
+      </button>
+    </a>
+    <div class="absolute w-screen flex flex-col items-center">
+      <img src="/assets/images/logo-raisin-purple.png" class="w-10 h-10">
+    </div>
+  </div>
   <router-outlet></router-outlet>
 </div>

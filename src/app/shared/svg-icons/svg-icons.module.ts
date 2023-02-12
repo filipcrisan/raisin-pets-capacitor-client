@@ -21,5 +21,9 @@ export class SvgIconsModule {
       'cancel',
       sanitizer.bypassSecurityTrustResourceUrl(`${this.iconsPath}/cancel.svg`)
     );
+    iconRegistry.addSvgIcon(
+      'menu',
+      sanitizer.bypassSecurityTrustResourceUrl(`${this.iconsPath}/menu.svg`)
+    );
   }
 }

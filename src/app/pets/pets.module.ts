@@ -12,6 +12,7 @@ import { SharedModule } from '../shared/shared.module';
 import { AddPetContainerComponent } from './containers/add-pet-container/add-pet-container.component';
 import { AddPetComponent } from './components/add-pet/add-pet.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MenuContainerComponent } from './containers/menu-container/menu-container.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     PetsListContainerComponent,
     AddPetContainerComponent,
     AddPetComponent,
+    MenuContainerComponent,
   ],
   imports: [
     ReactiveFormsModule,
