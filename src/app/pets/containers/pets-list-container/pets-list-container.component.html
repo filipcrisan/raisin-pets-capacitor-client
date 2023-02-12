@@ -10,5 +10,7 @@
     [pets]="petsQuery.entities$ | async"
     [loading]="petsQuery.loading$ | async"
     [error]="petsQuery.error$ | async"
+    (editDetails)="onEditDetails($event)"
+    (delete)="onDelete($event)"
   ></app-pets-list>
 </div>

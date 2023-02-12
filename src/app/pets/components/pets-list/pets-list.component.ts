@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { Pet } from '../../models/pet.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Species } from '../../models/species.model';
@@ -14,6 +20,17 @@ export class PetsListComponent {
   @Input() pets: Pet[];
   @Input() loading: boolean;
   @Input() error: HttpErrorResponse;
+
+  @Output() editDetails = new EventEmitter<number>();
+  @Output() delete = new EventEmitter<number>();
+
+  onEditDetails(pet: Pet): void {
+    this.editDetails.emit(pet.id);
+  }
+
+  onDelete(pet: Pet): void {
+    this.delete.emit(pet.id);
+  }
 
   getAvatarUrlOrDefault(pet: Pet): string {
     if (pet.avatarUrl.length) {

@@ -13,6 +13,8 @@ import { AddPetContainerComponent } from './containers/add-pet-container/add-pet
 import { AddPetComponent } from './components/add-pet/add-pet.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MenuContainerComponent } from './containers/menu-container/menu-container.component';
+import { EditPetComponent } from './components/edit-pet/edit-pet.component';
+import { EditPetContainerComponent } from './containers/edit-pet-container/edit-pet-container.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { MenuContainerComponent } from './containers/menu-container/menu-contain
     AddPetContainerComponent,
     AddPetComponent,
     MenuContainerComponent,
+    EditPetComponent,
+    EditPetContainerComponent,
   ],
   imports: [
     ReactiveFormsModule,

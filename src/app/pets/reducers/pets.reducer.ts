@@ -50,7 +50,7 @@ export const reducer = createReducer(
       error: error,
     },
   })),
-  on(PetsPageActions.addPet, (state) => ({
+  on(PetsPageActions.addPet, PetsPageActions.editPet, (state) => ({
     ...state,
     pets: {
       ...state.pets,
@@ -67,12 +67,25 @@ export const reducer = createReducer(
       error: null,
     },
   })),
-  on(PetsApiActions.addPetFailure, (state, { error }) => ({
+  on(
+    PetsApiActions.addPetFailure,
+    PetsApiActions.editPetFailure,
+    (state, { error }) => ({
+      ...state,
+      pets: {
+        ...state.pets,
+        saving: false,
+        error: error,
+      },
+    })
+  ),
+  on(PetsApiActions.editPetSuccess, (state, { pet }) => ({
     ...state,
     pets: {
       ...state.pets,
+      entities: state.pets.entities.map((x) => (x.id === pet.id ? pet : x)),
       saving: false,
-      error: error,
+      error: null,
     },
   }))
 );

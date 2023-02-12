@@ -28,4 +28,14 @@ export class PetsListContainerComponent implements OnInit {
       .navigate(['add'], { relativeTo: this.activatedRoute.parent })
       .then();
   }
+
+  onEditDetails(id: number): void {
+    this.router
+      .navigate([`edit/${id}`], { relativeTo: this.activatedRoute.parent })
+      .then();
+  }
+
+  onDelete(id: number): void {
+    console.log(id);
+  }
 }
