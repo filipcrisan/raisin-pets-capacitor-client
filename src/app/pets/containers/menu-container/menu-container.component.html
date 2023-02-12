@@ -9,7 +9,7 @@
       <img src="/assets/images/logo-raisin-purple.png" class="w-10 h-10">
     </div>
   </div>
-  <div class="flex flex-col justify-between items-center h-full pt-2.5">
+  <div class="flex flex-col justify-between items-center pt-2.5 menuContainer">
     <ng-container *ngIf="(authQuery.userLoading$ | async) === false && (authQuery.userError$ | async) === null">
       <p>You are currently logged in as <i>{{(authQuery.user$ | async).firstName}}</i>.</p>
     </ng-container>
