@@ -50,14 +50,19 @@ export const reducer = createReducer(
       error: error,
     },
   })),
-  on(PetsPageActions.addPet, PetsPageActions.editPet, (state) => ({
-    ...state,
-    pets: {
-      ...state.pets,
-      saving: true,
-      error: null,
-    },
-  })),
+  on(
+    PetsPageActions.addPet,
+    PetsPageActions.editPet,
+    PetsPageActions.deletePet,
+    (state) => ({
+      ...state,
+      pets: {
+        ...state.pets,
+        saving: true,
+        error: null,
+      },
+    })
+  ),
   on(PetsApiActions.addPetSuccess, (state, { pet }) => ({
     ...state,
     pets: {
@@ -84,6 +89,15 @@ export const reducer = createReducer(
     pets: {
       ...state.pets,
       entities: state.pets.entities.map((x) => (x.id === pet.id ? pet : x)),
+      saving: false,
+      error: null,
+    },
+  })),
+  on(PetsApiActions.deletePetSuccess, (state, { pet }) => ({
+    ...state,
+    pets: {
+      ...state.pets,
+      entities: state.pets.entities.filter((x) => x.id !== pet.id),
       saving: false,
       error: null,
     },

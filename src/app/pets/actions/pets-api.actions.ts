@@ -31,3 +31,8 @@ export const editPetFailure = createAction(
   '[Pets/API] Edit pet Failure',
   props<{ error: HttpErrorResponse }>()
 );
+
+export const deletePetSuccess = createAction(
+  '[Pets/API] Delete pet Success',
+  props<{ pet: Pet }>()
+);
