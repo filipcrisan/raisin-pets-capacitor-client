@@ -22,15 +22,17 @@ import { NgChanges } from '../../../shared/models/simple-changes-typed';
 })
 export class EditPetComponent implements OnChanges {
   @Input() pet: Pet;
+  @Input() avatarInBase64: string;
   @Input() saving: boolean;
   @Input() error: HttpErrorResponse;
 
   @Output() editPet = new EventEmitter<Pet>();
   @Output() cancel = new EventEmitter<void>();
+  @Output() takePicture = new EventEmitter<void>();
 
   petForm = new FormGroup({
     name: new FormControl('', Validators.required),
-    avatarUrl: new FormControl(''),
+    avatarInBase64: new FormControl(''),
     species: new FormControl(Species.Dog),
     size: new FormControl(Size.Medium),
     dateOfBirth: new FormControl<Date>(new Date(Date.now())),
@@ -42,6 +44,10 @@ export class EditPetComponent implements OnChanges {
   ngOnChanges(changes: NgChanges<EditPetComponent>): void {
     if (changes.pet?.currentValue) {
       this.petForm.patchValue(this.pet);
+    }
+
+    if (changes.avatarInBase64?.currentValue) {
+      this.petForm.controls.avatarInBase64.setValue(this.avatarInBase64);
     }
   }
 
@@ -55,6 +61,10 @@ export class EditPetComponent implements OnChanges {
 
   onCancel(): void {
     this.cancel.emit();
+  }
+
+  onChangeAvatar(): void {
+    this.takePicture.emit();
   }
 
   get formValue(): Pet {

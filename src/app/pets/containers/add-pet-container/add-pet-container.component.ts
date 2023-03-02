@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { PetsFacades } from '../../facades/pets.facades';
 import { ActivatedRoute, Router } from '@angular/router';
-import { tap } from 'rxjs';
+import { BehaviorSubject, tap } from 'rxjs';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Pet } from '../../models/pet.model';
+import { CameraService } from '../../../shared/services/camera.service';
 
 @UntilDestroy()
 @Component({
@@ -15,10 +16,13 @@ import { Pet } from '../../models/pet.model';
 export class AddPetContainerComponent {
   petsQuery = this.petsFacades.query;
 
+  avatarInBase64$ = new BehaviorSubject<string>(null);
+
   constructor(
     private petsFacades: PetsFacades,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private cameraService: CameraService
   ) {}
 
   onAddPet(pet: Pet): void {
@@ -45,5 +49,13 @@ export class AddPetContainerComponent {
         relativeTo: this.activatedRoute.parent,
       })
       .then();
+  }
+
+  async onTakePicture(): Promise<void> {
+    const image = await this.cameraService.takePicture();
+
+    this.avatarInBase64$.next(
+      this.cameraService.getImageUrl(image.base64String)
+    );
   }
 }

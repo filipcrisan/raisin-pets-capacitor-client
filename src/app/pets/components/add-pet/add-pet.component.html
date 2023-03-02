@@ -1,5 +1,16 @@
 <div class="flex justify-center items-center w-full h-full">
   <div *ngIf="!saving && !error" class="w-full max-w-sm">
+    <div class="buttonContainer m-2 w-40">
+      <button (click)="onCreateAvatar()" class="flex flex-row m-1 justify-between">
+        <img src="assets/icons/camera.png" class="ml-2 w-9 h-9 m-auto">
+        <span class="ml-1 m-auto">Create avatar</span>
+      </button>
+    </div>
+
+    <div *ngIf="avatarInBase64" class="m-2">
+      <img [src]="avatarInBase64">
+    </div>
+
     <form [formGroup]="petForm">
       <div class="flex flex-col items-start h-full w-full">
         <span>Name</span>
@@ -8,10 +19,6 @@
           <mat-error *ngIf="petForm.touched && petForm.controls.name.errors">
             Name is required
           </mat-error>
-        </mat-form-field>
-        <span>Avatar URL</span>
-        <mat-form-field class="w-full">
-          <input matInput formControlName="avatarUrl" class="bg-landing-page-yellow">
         </mat-form-field>
         <span>Date of birth (approx.)</span>
         <mat-form-field appearance="fill" class="w-full">

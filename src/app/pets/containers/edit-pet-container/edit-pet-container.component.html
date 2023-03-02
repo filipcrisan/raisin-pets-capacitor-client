@@ -1,7 +1,9 @@
 <app-edit-pet
   [pet]="pet$ | async"
+  [avatarInBase64]="avatarInBase64$ |  async"
   [saving]="petsQuery.pets.saving$ | async"
   [error]="petsQuery.pets.error$ | async"
   (editPet)="onEditPet($event)"
   (cancel)="onCancel()"
+  (takePicture)="onTakePicture()"
 ></app-edit-pet>
