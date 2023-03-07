@@ -2,8 +2,10 @@
   <div *ngIf="!loading && !error" class="wrapper">
     <div *ngFor="let pet of pets">
       <div class="flex flex-row justify-between items-center">
-        <img [src]="getAvatarUrlOrDefault(pet)" class="w-20 h-20">
-        <span class="text-left">{{pet.name}}</span>
+        <div class="flex flex-row justify-between items-center" (click)="onSelectPet(pet.id)">
+          <img [src]="getAvatarUrlOrDefault(pet)" class="w-20 h-20">
+          <span class="text-left">{{pet.name}}</span>
+        </div>
         <button
           [matMenuTriggerFor]="petsActions"
           class="flex flex-row m-1 justify-between"

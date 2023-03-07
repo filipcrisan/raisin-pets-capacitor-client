@@ -23,6 +23,7 @@ export class PetsListComponent {
 
   @Output() editDetails = new EventEmitter<number>();
   @Output() delete = new EventEmitter<number>();
+  @Output() selectPet = new EventEmitter<number>();
 
   onEditDetails(pet: Pet): void {
     this.editDetails.emit(pet.id);
@@ -30,6 +31,10 @@ export class PetsListComponent {
 
   onDelete(pet: Pet): void {
     this.delete.emit(pet.id);
+  }
+
+  onSelectPet(id: number): void {
+    this.selectPet.emit(id);
   }
 
   getAvatarUrlOrDefault(pet: Pet): string {

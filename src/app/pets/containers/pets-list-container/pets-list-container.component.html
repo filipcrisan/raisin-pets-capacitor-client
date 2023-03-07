@@ -12,5 +12,6 @@
     [error]="petsQuery.error$ | async"
     (editDetails)="onEditDetails($event)"
     (delete)="onDelete($event)"
+    (selectPet)="onSelectPet($event)"
   ></app-pets-list>
 </div>

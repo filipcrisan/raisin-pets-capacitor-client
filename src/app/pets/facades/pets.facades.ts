@@ -7,6 +7,8 @@ import { Store } from '@ngrx/store';
 import { PetsApiActions, PetsPageActions } from '../actions';
 import { petsQuery } from '../reducers/pets.selector';
 import { State } from '../reducers';
+import { Tutorial } from '../models/tutorial.model';
+import { TutorialCategory } from '../models/tutorial-category.model';
 
 @Injectable()
 export class PetsFacades {
@@ -16,6 +18,11 @@ export class PetsFacades {
       loading$: this.store.select(petsQuery.getPetsLoading),
       error$: this.store.select(petsQuery.getPetsError),
       saving$: this.store.select(petsQuery.getPetsSaving),
+    },
+    tutorials: {
+      entities$: this.store.select(petsQuery.getTutorials),
+      loading$: this.store.select(petsQuery.getTutorialsLoading),
+      error$: this.store.select(petsQuery.getTutorialsError),
     },
   };
 
@@ -85,5 +92,33 @@ export class PetsFacades {
         },
       })
     );
+  }
+
+  getTutorialsByCategory(
+    petId: number,
+    category: TutorialCategory
+  ): Observable<Tutorial[]> {
+    this.store.dispatch(PetsPageActions.getTutorialsByCategory());
+
+    return this.petsService.getTutorialsByCategory(petId, category).pipe(
+      tap({
+        next: (tutorials) => {
+          this.store.dispatch(
+            PetsApiActions.getTutorialsByCategorySuccess({ tutorials })
+          );
+        },
+        error: (error: HttpErrorResponse) => {
+          // TODO: add toast notification service
+
+          this.store.dispatch(
+            PetsApiActions.getTutorialsByCategoryFailure({ error })
+          );
+        },
+      })
+    );
+  }
+
+  clearTutorials(): void {
+    this.store.dispatch(PetsPageActions.clearTutorials());
   }
 }
