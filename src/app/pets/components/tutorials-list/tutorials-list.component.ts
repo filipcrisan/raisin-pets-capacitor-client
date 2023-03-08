@@ -13,6 +13,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { TutorialCategory } from '../../models/tutorial-category.model';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { distinctUntilChanged, filter } from 'rxjs';
+import { Species } from '../../models/species.model';
+import { Size } from '../../models/size.model';
 
 @UntilDestroy()
 @Component({
@@ -33,6 +35,9 @@ export class TutorialsListComponent implements OnInit {
   tutorialsForm = new FormGroup({
     category: new FormControl(TutorialCategory.Hygiene),
   });
+
+  Species = Species;
+  Size = Size;
 
   ngOnInit() {
     this.getTutorials.emit(this.tutorialsForm.controls.category.value);
