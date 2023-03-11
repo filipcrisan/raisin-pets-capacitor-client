@@ -3,4 +3,5 @@
   [loading]="tutorialsQuery.loading$ | async"
   [error]="tutorialsQuery.error$ | async"
   (getTutorials)="onGetTutorials($event)"
+  (back)="onBack()"
 ></app-tutorials-list>

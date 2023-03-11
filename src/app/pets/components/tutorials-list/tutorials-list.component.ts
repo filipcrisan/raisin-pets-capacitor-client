@@ -29,6 +29,7 @@ export class TutorialsListComponent implements OnInit {
   @Input() error: HttpErrorResponse;
 
   @Output() getTutorials = new EventEmitter<TutorialCategory>();
+  @Output() back = new EventEmitter<void>();
 
   categoriesOptions = Const.TutorialCategoryOptions;
 
@@ -51,5 +52,9 @@ export class TutorialsListComponent implements OnInit {
       .subscribe((x) => {
         this.getTutorials.emit(x);
       });
+  }
+
+  onBack(): void {
+    this.back.emit();
   }
 }

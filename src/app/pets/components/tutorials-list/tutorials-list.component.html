@@ -1,4 +1,7 @@
 <div class="flex flex-col justify-center items-center w-full h-full">
+  <button mat-icon-button (click)="onBack()" class="self-end">
+    <mat-icon svgIcon="cancel"></mat-icon>
+  </button>
   <div *ngIf="!loading && !error" class="wrapper">
     <span>Choose category</span>
     <form [formGroup]="tutorialsForm">

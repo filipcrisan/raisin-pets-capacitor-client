@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { PetsFacades } from '../../facades/pets.facades';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TutorialCategory } from '../../models/tutorial-category.model';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
@@ -18,7 +18,8 @@ export class TutorialsListContainerComponent implements OnDestroy {
 
   constructor(
     private petsFacades: PetsFacades,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {
     this.petId = +this.activatedRoute.snapshot.params['id'];
   }
@@ -32,5 +33,13 @@ export class TutorialsListContainerComponent implements OnDestroy {
 
   ngOnDestroy(): void {
     this.petsFacades.clearTutorials();
+  }
+
+  onBack(): void {
+    this.router
+      .navigate(['list'], {
+        relativeTo: this.activatedRoute.parent,
+      })
+      .then();
   }
 }
