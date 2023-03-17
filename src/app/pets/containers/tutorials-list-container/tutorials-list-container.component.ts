@@ -37,7 +37,7 @@ export class TutorialsListContainerComponent implements OnDestroy {
 
   onBack(): void {
     this.router
-      .navigate(['list'], {
+      .navigate([`menu/${this.petId}`], {
         relativeTo: this.activatedRoute.parent,
       })
       .then();

@@ -20,6 +20,9 @@ import { TutorialsListComponent } from './components/tutorials-list/tutorials-li
 import { TutorialsService } from './services/tutorials.service';
 import { ExercisesService } from './services/exercises.service';
 import { ExercisesFacades } from './facades/exercises.facades';
+import { ExercisesListComponent } from './components/exercises-list/exercises-list.component';
+import { PetMenuContainerComponent } from './containers/pet-menu-container/pet-menu-container.component';
+import { ExercisesListContainerComponent } from './containers/exercises-list-container/exercises-list-container.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +36,9 @@ import { ExercisesFacades } from './facades/exercises.facades';
     EditPetContainerComponent,
     TutorialsListContainerComponent,
     TutorialsListComponent,
+    ExercisesListComponent,
+    PetMenuContainerComponent,
+    ExercisesListContainerComponent,
   ],
   imports: [
     ReactiveFormsModule,

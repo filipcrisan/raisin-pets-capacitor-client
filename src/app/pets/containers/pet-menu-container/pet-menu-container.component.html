@@ -1,0 +1,17 @@
+<div class="flex flex-col justify-center items-center w-full h-full pt-2.5">
+  <button mat-icon-button (click)="onBack()" class="self-end">
+    <mat-icon svgIcon="cancel"></mat-icon>
+  </button>
+  <div class="buttonContainer">
+    <button (click)="onGoToTutorials()" class="flex flex-row m-1 justify-between">
+      <img src="assets/icons/tutorial.png" class="ml-2 w-9 h-9 m-auto">
+      <span class="ml-1 m-auto">Tutorials</span>
+    </button>
+  </div>
+  <div class="buttonContainer">
+    <button (click)="onGoToExerciseTracking()" class="flex flex-row m-1 justify-between">
+      <img src="assets/icons/track.png" class="ml-2 w-9 h-9 m-auto">
+      <span class="ml-1 m-auto">Exercise tracking</span>
+    </button>
+  </div>
+</div>

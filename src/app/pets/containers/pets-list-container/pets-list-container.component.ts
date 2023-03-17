@@ -61,7 +61,7 @@ export class PetsListContainerComponent implements OnInit {
 
   onSelectPet(id: number): void {
     this.router
-      .navigate([`tutorials/${id}`], { relativeTo: this.activatedRoute.parent })
+      .navigate([`menu/${id}`], { relativeTo: this.activatedRoute.parent })
       .then();
   }
 }

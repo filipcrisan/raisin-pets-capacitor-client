@@ -118,6 +118,7 @@ export class AuthFacades {
           this.router.navigate(['']).then();
         },
         error: (error: HttpErrorResponse) => {
+          localStorage.removeItem('token');
           console.log(error);
         },
       });
