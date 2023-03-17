@@ -9,6 +9,7 @@ import { petsQuery } from '../reducers/pets.selector';
 import { State } from '../reducers';
 import { Tutorial } from '../models/tutorial.model';
 import { TutorialCategory } from '../models/tutorial-category.model';
+import { TutorialsService } from '../services/tutorials.service';
 
 @Injectable()
 export class PetsFacades {
@@ -26,7 +27,11 @@ export class PetsFacades {
     },
   };
 
-  constructor(private store: Store<State>, private petsService: PetsService) {}
+  constructor(
+    private store: Store<State>,
+    private petsService: PetsService,
+    private tutorialsService: TutorialsService
+  ) {}
 
   getAllPets(): Observable<Pet[]> {
     this.store.dispatch(PetsPageActions.getAllPets());
@@ -100,7 +105,7 @@ export class PetsFacades {
   ): Observable<Tutorial[]> {
     this.store.dispatch(PetsPageActions.getTutorialsByCategory());
 
-    return this.petsService.getTutorialsByCategory(petId, category).pipe(
+    return this.tutorialsService.getTutorialsByCategory(petId, category).pipe(
       tap({
         next: (tutorials) => {
           this.store.dispatch(

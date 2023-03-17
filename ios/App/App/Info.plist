@@ -69,5 +69,11 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSLocationUsageDescription</key>
+	<string>raisin&apos; pets wants to use your device&apos;s location</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>raisin&apos; pets wants to use your device&apos;s location</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>raisin&apos; pets wants to use your device&apos;s location</string>
 </dict>
 </plist>

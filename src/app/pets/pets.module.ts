@@ -17,6 +17,9 @@ import { EditPetComponent } from './components/edit-pet/edit-pet.component';
 import { EditPetContainerComponent } from './containers/edit-pet-container/edit-pet-container.component';
 import { TutorialsListContainerComponent } from './containers/tutorials-list-container/tutorials-list-container.component';
 import { TutorialsListComponent } from './components/tutorials-list/tutorials-list.component';
+import { TutorialsService } from './services/tutorials.service';
+import { ExercisesService } from './services/exercises.service';
+import { ExercisesFacades } from './facades/exercises.facades';
 
 @NgModule({
   declarations: [
@@ -38,6 +41,12 @@ import { TutorialsListComponent } from './components/tutorials-list/tutorials-li
     SharedModule,
     StoreModule.forFeature(featureKey, reducers),
   ],
-  providers: [PetsFacades, PetsService],
+  providers: [
+    PetsFacades,
+    PetsService,
+    TutorialsService,
+    ExercisesService,
+    ExercisesFacades,
+  ],
 })
 export class PetsModule {}
