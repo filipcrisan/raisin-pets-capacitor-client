@@ -1,1 +1,23 @@
-<p>exercises-list works!</p>
+<div class="flex flex-col justify-center items-center w-full h-full">
+  <div *ngIf="!loading && !error" class="wrapper">
+    <div *ngFor="let exercise of exercises">
+      <div class="flex flex-row justify-between items-center">
+        <div class="flex flex-row justify-between items-center" (click)="onSelectExercise(exercise.id)">
+          <span class="text-left">{{exercise.name}}</span>
+        </div>
+        <button
+          [matMenuTriggerFor]="petsActions"
+          class="flex flex-row m-1 justify-between"
+        >
+          <img src="assets/icons/context-menu.png" class="ml-2 w-9 h-9 m-auto">
+        </button>
+        <mat-menu #petsActions="matMenu">
+        </mat-menu>
+      </div>
+    </div>
+  </div>
+
+  <mat-progress-spinner *ngIf="loading || error" mode="indeterminate" class="mt-10 m-auto"></mat-progress-spinner>
+
+  <p *ngIf="!loading && !error && !exercises.length" class="text-2xl mt-10 m-auto">No exercises to display.</p>
+</div>

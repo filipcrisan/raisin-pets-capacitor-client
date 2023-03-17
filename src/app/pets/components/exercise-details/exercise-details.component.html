@@ -1,0 +1,10 @@
+<div class="flex flex-col justify-center items-center w-full h-full pt-2.5">
+  <button mat-icon-button (click)="onBack()" class="self-end">
+    <mat-icon svgIcon="cancel"></mat-icon>
+  </button>
+  <ng-container *ngIf="exercise && !loading && !error">
+    <span class="text-2xl">{{exercise.name}}</span>
+    <span class="text-xl">Total distance: {{exercise.totalDistance}}</span>
+    <span class="text-xl">Average speed: {{exercise.averageSpeed}}</span>
+  </ng-container>
+</div>

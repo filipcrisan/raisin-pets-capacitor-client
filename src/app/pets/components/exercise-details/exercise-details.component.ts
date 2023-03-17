@@ -9,19 +9,19 @@ import { Exercise } from '../../models/exercise.model';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
-  selector: 'app-exercises-list',
-  templateUrl: './exercises-list.component.html',
-  styleUrls: ['./exercises-list.component.scss'],
+  selector: 'app-exercise-details',
+  templateUrl: './exercise-details.component.html',
+  styleUrls: ['./exercise-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ExercisesListComponent {
-  @Input() exercises: Exercise[];
+export class ExerciseDetailsComponent {
+  @Input() exercise: Exercise;
   @Input() loading: boolean;
   @Input() error: HttpErrorResponse;
 
-  @Output() selectExercise = new EventEmitter<number>();
+  @Output() back = new EventEmitter<void>();
 
-  onSelectExercise(id: number): void {
-    this.selectExercise.emit(id);
+  onBack(): void {
+    this.back.emit();
   }
 }

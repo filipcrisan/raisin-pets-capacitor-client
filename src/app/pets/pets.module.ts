@@ -23,6 +23,10 @@ import { ExercisesFacades } from './facades/exercises.facades';
 import { ExercisesListComponent } from './components/exercises-list/exercises-list.component';
 import { PetMenuContainerComponent } from './containers/pet-menu-container/pet-menu-container.component';
 import { ExercisesListContainerComponent } from './containers/exercises-list-container/exercises-list-container.component';
+import { AddExerciseContainerComponent } from './containers/add-exercise-container/add-exercise-container.component';
+import { AddExerciseComponent } from './components/add-exercise/add-exercise.component';
+import { ExerciseDetailsContainerComponent } from './containers/exercise-details-container/exercise-details-container.component';
+import { ExerciseDetailsComponent } from './components/exercise-details/exercise-details.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +43,10 @@ import { ExercisesListContainerComponent } from './containers/exercises-list-con
     ExercisesListComponent,
     PetMenuContainerComponent,
     ExercisesListContainerComponent,
+    AddExerciseContainerComponent,
+    AddExerciseComponent,
+    ExerciseDetailsContainerComponent,
+    ExerciseDetailsComponent,
   ],
   imports: [
     ReactiveFormsModule,

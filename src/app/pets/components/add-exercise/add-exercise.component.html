@@ -1,0 +1,15 @@
+<div class="flex flex-col justify-center items-center w-full h-full">
+  <button mat-icon-button (click)="onBack()" class="self-end">
+    <mat-icon svgIcon="cancel"></mat-icon>
+  </button>
+  <div class="buttonContainer">
+    <button (click)="onExerciseChanged()" class="flex flex-row m-1 justify-between">
+      <ng-container *ngIf="watchId === null else stop">
+        <span class="font-mono text-2xl mx-4">Start exercise</span>
+      </ng-container>
+      <ng-template #stop>
+        <span class="font-mono text-2xl mx-4">Stop exercise</span>
+      </ng-template>
+    </button>
+  </div>
+</div>

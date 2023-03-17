@@ -1,1 +1,18 @@
-<p>exercises-list-container works!</p>
+<div class="flex flex-col justify-center items-center w-full h-full overflow-auto">
+  <button mat-icon-button (click)="onBack()" class="self-end">
+    <mat-icon svgIcon="cancel"></mat-icon>
+  </button>
+  <div class="buttonContainer">
+    <button (click)="onAddExercise()" class="flex flex-row m-1 justify-between">
+      <img src="assets/icons/plus.png" class="ml-2 w-9 h-9 m-auto">
+      <span class="ml-1 m-auto">Add exercise session</span>
+    </button>
+  </div>
+
+  <app-exercises-list
+    [exercises]="exercisesQuery.entities$ | async"
+    [loading]="exercisesQuery.loading$ | async"
+    [error]="exercisesQuery.error$ | async"
+    (selectExercise)="onSelectExercise($event)"
+  ></app-exercises-list>
+</div>
