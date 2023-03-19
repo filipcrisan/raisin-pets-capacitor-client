@@ -27,6 +27,7 @@ import { AddExerciseContainerComponent } from './containers/add-exercise-contain
 import { AddExerciseComponent } from './components/add-exercise/add-exercise.component';
 import { ExerciseDetailsContainerComponent } from './containers/exercise-details-container/exercise-details-container.component';
 import { ExerciseDetailsComponent } from './components/exercise-details/exercise-details.component';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { ExerciseDetailsComponent } from './components/exercise-details/exercise
     PetsRoutingModule,
     SharedModule,
     StoreModule.forFeature(featureKey, reducers),
+    GoogleMapsModule,
   ],
   providers: [
     PetsFacades,

@@ -3,7 +3,7 @@
     <div *ngFor="let exercise of exercises">
       <div class="flex flex-row justify-between items-center">
         <div class="flex flex-row justify-between items-center" (click)="onSelectExercise(exercise.id)">
-          <span class="text-left">{{exercise.name}}</span>
+          <span class="text-left">#{{exercise.id}} {{exercise.name}}</span>
         </div>
         <button
           [matMenuTriggerFor]="petsActions"

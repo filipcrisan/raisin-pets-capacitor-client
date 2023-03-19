@@ -3,8 +3,12 @@
     <mat-icon svgIcon="cancel"></mat-icon>
   </button>
   <ng-container *ngIf="exercise && !loading && !error">
-    <span class="text-2xl">{{exercise.name}}</span>
+    <span class="text-2xl">#{{exercise.id}} {{exercise.name}}</span>
     <span class="text-xl">Total distance: {{exercise.totalDistance}}</span>
     <span class="text-xl">Average speed: {{exercise.averageSpeed}}</span>
+
+    <google-map #googleMap [options]="options" [center]="center" [width]="350" [height]="350">
+      <map-polyline [path]="vertices"></map-polyline>
+    </google-map>
   </ng-container>
 </div>
