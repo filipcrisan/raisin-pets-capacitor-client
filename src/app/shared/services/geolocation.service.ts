@@ -14,8 +14,10 @@ export class GeolocationService {
     return Geolocation.requestPermissions();
   }
 
-  canUseLocation(): Promise<PermissionStatus> {
-    return Geolocation.checkPermissions();
+  canUseLocation(): Promise<boolean> {
+    return Geolocation.checkPermissions().then((x) => {
+      return x.location === 'granted';
+    });
   }
 
   watchLocation(successCallback: WatchPositionCallback): Promise<string> {

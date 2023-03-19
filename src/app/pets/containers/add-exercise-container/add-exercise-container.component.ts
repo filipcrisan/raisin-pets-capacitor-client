@@ -58,14 +58,7 @@ export class AddExerciseContainerComponent {
     if (!canUseLocation) {
       this.geolocationService.requestPermission().then(
         () => {
-          this.geolocationService
-            .watchLocation((location) => {
-              this.locations = [...this.locations, location];
-            })
-            .then((watchId) => {
-              this.watchId = watchId;
-              this.watchId$.next(this.watchId);
-            });
+          this.watchLocation();
         },
         () => {}
       );
@@ -73,6 +66,10 @@ export class AddExerciseContainerComponent {
       return;
     }
 
+    this.watchLocation();
+  }
+
+  private watchLocation(): void {
     this.geolocationService
       .watchLocation((location) => {
         this.locations = [...this.locations, location];
@@ -88,7 +85,6 @@ export class AddExerciseContainerComponent {
       await this.geolocationService.clearWatch(this.watchId);
       this.watchId = null;
       this.watchId$.next(null);
-      console.log(this.geolocationService.getTotalDistance(this.locations));
     }
   }
 
