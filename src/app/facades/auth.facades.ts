@@ -8,7 +8,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { authQuery } from '../reducers/auth.selector';
-import { delay } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @UntilDestroy()
 @Injectable()
@@ -22,7 +22,8 @@ export class AuthFacades {
   constructor(
     private store: Store<State>,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 
   login(): void {
@@ -35,8 +36,8 @@ export class AuthFacades {
 
         this.onGoogleSignIn(googleUser.authentication.idToken);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        this.toastr.error('Google error upon login. Please try again.');
       });
   }
 
@@ -45,8 +46,8 @@ export class AuthFacades {
       .then(() => {
         this.onGoogleSignOut();
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        this.toastr.error('Google error upon logout. Please try again.');
       });
   }
 
@@ -68,6 +69,8 @@ export class AuthFacades {
           this.router.navigate(['pets']).then();
         },
         error: (error: HttpErrorResponse) => {
+          this.toastr.error('Error upon loading user. Please try again.');
+
           this.store.dispatch(AuthActions.loadUserFailure({ error }));
         },
       });
@@ -103,6 +106,8 @@ export class AuthFacades {
           this.router.navigate(['pets']).then();
         },
         error: (error: HttpErrorResponse) => {
+          this.toastr.error('Error upon authentication. Please try again.');
+
           this.store.dispatch(AuthActions.loadUserFailure({ error }));
         },
       });
@@ -117,9 +122,10 @@ export class AuthFacades {
           localStorage.removeItem('token');
           this.router.navigate(['']).then();
         },
-        error: (error: HttpErrorResponse) => {
+        error: () => {
           localStorage.removeItem('token');
-          console.log(error);
+
+          this.toastr.error('Error upon logout. Please try again.');
         },
       });
   }
@@ -135,13 +141,13 @@ export class AuthFacades {
               localStorage.removeItem('token');
               this.onGoogleSignIn(token);
             },
-            error: (error: HttpErrorResponse) => {
-              console.log(error);
+            error: () => {
+              this.toastr.error('Error upon logout. Please try again.');
             },
           });
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        this.toastr.error('Google error upon logout. Please try again.');
       });
   }
 

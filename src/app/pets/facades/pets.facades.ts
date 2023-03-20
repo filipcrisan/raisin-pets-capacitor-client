@@ -10,6 +10,7 @@ import { State } from '../reducers';
 import { Tutorial } from '../models/tutorial.model';
 import { TutorialCategory } from '../models/tutorial-category.model';
 import { TutorialsService } from '../services/tutorials.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class PetsFacades {
@@ -30,7 +31,8 @@ export class PetsFacades {
   constructor(
     private store: Store<State>,
     private petsService: PetsService,
-    private tutorialsService: TutorialsService
+    private tutorialsService: TutorialsService,
+    private toastr: ToastrService
   ) {}
 
   getAllPets(): Observable<Pet[]> {
@@ -42,7 +44,7 @@ export class PetsFacades {
           this.store.dispatch(PetsApiActions.getAllPetsSuccess({ pets }));
         },
         error: (error: HttpErrorResponse) => {
-          // TODO: add toast notification service
+          this.toastr.error('Error upon fetching pets. Please try again.');
 
           this.store.dispatch(PetsApiActions.getAllPetsFailure({ error }));
         },
@@ -59,7 +61,7 @@ export class PetsFacades {
           this.store.dispatch(PetsApiActions.addPetSuccess({ pet }));
         },
         error: (error: HttpErrorResponse) => {
-          // TODO: add toast notification service
+          this.toastr.error('Error upon adding pet. Please try again.');
 
           this.store.dispatch(PetsApiActions.addPetFailure({ error }));
         },
@@ -76,7 +78,7 @@ export class PetsFacades {
           this.store.dispatch(PetsApiActions.editPetSuccess({ pet }));
         },
         error: (error: HttpErrorResponse) => {
-          // TODO: add toast notification service
+          this.toastr.error('Error upon editing pet. Please try again.');
 
           this.store.dispatch(PetsApiActions.editPetFailure({ error }));
         },
@@ -92,8 +94,8 @@ export class PetsFacades {
         next: (pet) => {
           this.store.dispatch(PetsApiActions.deletePetSuccess({ pet }));
         },
-        error: (error: HttpErrorResponse) => {
-          // TODO: add toast notification service
+        error: () => {
+          this.toastr.error('Error upon deleting pet. Please try again.');
         },
       })
     );
@@ -113,7 +115,7 @@ export class PetsFacades {
           );
         },
         error: (error: HttpErrorResponse) => {
-          // TODO: add toast notification service
+          this.toastr.error('Error upon fetching tutorials. Please try again.');
 
           this.store.dispatch(
             PetsApiActions.getTutorialsByCategoryFailure({ error })

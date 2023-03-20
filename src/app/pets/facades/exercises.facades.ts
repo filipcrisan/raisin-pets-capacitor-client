@@ -1,11 +1,12 @@
-import { Injectable } from "@angular/core";
-import { Observable, tap } from "rxjs";
-import { HttpErrorResponse } from "@angular/common/http";
-import { Store } from "@ngrx/store";
-import { PetsApiActions, PetsPageActions } from "../actions";
-import { petsQuery } from "../reducers/pets.selector";
-import { ExercisesService } from "../services/exercises.service";
-import { Exercise } from "../models/exercise.model";
+import { Injectable } from '@angular/core';
+import { Observable, tap } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Store } from '@ngrx/store';
+import { PetsApiActions, PetsPageActions } from '../actions';
+import { petsQuery } from '../reducers/pets.selector';
+import { ExercisesService } from '../services/exercises.service';
+import { Exercise } from '../models/exercise.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class ExercisesFacades {
@@ -20,7 +21,8 @@ export class ExercisesFacades {
 
   constructor(
     private store: Store,
-    private exercisesService: ExercisesService
+    private exercisesService: ExercisesService,
+    private toastr: ToastrService
   ) {}
 
   getAllExercises(petId: number): Observable<Exercise[]> {
@@ -34,7 +36,7 @@ export class ExercisesFacades {
           );
         },
         error: (error: HttpErrorResponse) => {
-          // TODO: add toast notification service
+          this.toastr.error('Error upon fetching exercises. Please try again.');
 
           this.store.dispatch(PetsApiActions.getAllExercisesFailure({ error }));
         },
@@ -51,7 +53,7 @@ export class ExercisesFacades {
           this.store.dispatch(PetsApiActions.addExerciseSuccess({ exercise }));
         },
         error: (error: HttpErrorResponse) => {
-          // TODO: add toast notification service
+          this.toastr.error('Error upon adding exercise. Please try again.');
 
           this.store.dispatch(PetsApiActions.addExerciseFailure({ error }));
         },
