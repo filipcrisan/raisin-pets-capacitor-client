@@ -6,12 +6,15 @@
           <span class="text-left">#{{exercise.id}} {{exercise.name}}</span>
         </div>
         <button
-          [matMenuTriggerFor]="petsActions"
+          [matMenuTriggerFor]="exercisesActions"
           class="flex flex-row m-1 justify-between"
         >
           <img src="assets/icons/context-menu.png" class="ml-2 w-9 h-9 m-auto">
         </button>
-        <mat-menu #petsActions="matMenu">
+        <mat-menu #exercisesActions="matMenu">
+          <button mat-menu-item (click)="onDelete(exercise.id)">
+            <span>Delete</span>
+          </button>
         </mat-menu>
       </div>
     </div>

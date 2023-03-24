@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
-import { environment } from "../../../environments/environment";
-import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
-import { Exercise } from "../models/exercise.model";
+import { Injectable } from '@angular/core';
+import { environment } from '../../../environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Exercise } from '../models/exercise.model';
 
 @Injectable()
 export class ExercisesService {
@@ -18,6 +18,12 @@ export class ExercisesService {
     return this.http.post<Exercise>(
       `${this.apiUrl}/${exercise.petId}/exercises`,
       exercise
+    );
+  }
+
+  deleteExercise(petId: number, exerciseId: number): Observable<Exercise> {
+    return this.http.delete<Exercise>(
+      `${this.apiUrl}/${petId}/exercises/${exerciseId}`
     );
   }
 }

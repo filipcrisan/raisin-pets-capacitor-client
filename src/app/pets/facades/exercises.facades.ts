@@ -7,6 +7,7 @@ import { petsQuery } from '../reducers/pets.selector';
 import { ExercisesService } from '../services/exercises.service';
 import { Exercise } from '../models/exercise.model';
 import { ToastrService } from 'ngx-toastr';
+import { Reminder } from '../models/reminder.model';
 
 @Injectable()
 export class ExercisesFacades {
@@ -56,6 +57,23 @@ export class ExercisesFacades {
           this.toastr.error('Error upon adding exercise. Please try again.');
 
           this.store.dispatch(PetsApiActions.addExerciseFailure({ error }));
+        },
+      })
+    );
+  }
+
+  deleteExercise(petId: number, exerciseId: number): Observable<Exercise> {
+    this.store.dispatch(PetsPageActions.deleteExercise());
+
+    return this.exercisesService.deleteExercise(petId, exerciseId).pipe(
+      tap({
+        next: (exercise) => {
+          this.store.dispatch(
+            PetsApiActions.deleteExerciseSuccess({ exercise })
+          );
+        },
+        error: () => {
+          this.toastr.error('Error upon deleting exercise. Please try again.');
         },
       })
     );

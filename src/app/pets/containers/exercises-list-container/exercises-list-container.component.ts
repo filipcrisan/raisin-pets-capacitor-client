@@ -2,6 +2,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ExercisesFacades } from '../../facades/exercises.facades';
+import { ConfirmationDialogComponent } from '../../../shared/components/confirmation-dialog/confirmation-dialog.component';
+import { filter, switchMap } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
 
 @UntilDestroy()
 @Component({
@@ -18,7 +21,8 @@ export class ExercisesListContainerComponent {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private exercisesFacades: ExercisesFacades
+    private exercisesFacades: ExercisesFacades,
+    private dialog: MatDialog
   ) {
     this.petId = +this.activatedRoute.snapshot.params['id'];
   }
@@ -44,6 +48,28 @@ export class ExercisesListContainerComponent {
         relativeTo: this.activatedRoute.parent,
       })
       .then();
+  }
+
+  onDelete(exerciseId: number): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        title: 'Delete exercise',
+        message: 'Are you sure you want to delete this exercise?',
+        buttonLabel: 'Delete',
+      },
+      autoFocus: false,
+    });
+
+    dialogRef
+      .afterClosed()
+      .pipe(
+        untilDestroyed(this),
+        filter((x) => !!x),
+        switchMap(() =>
+          this.exercisesFacades.deleteExercise(this.petId, exerciseId)
+        )
+      )
+      .subscribe();
   }
 
   onBack(): void {

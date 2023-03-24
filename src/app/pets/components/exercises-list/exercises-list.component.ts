@@ -20,8 +20,13 @@ export class ExercisesListComponent {
   @Input() error: HttpErrorResponse;
 
   @Output() selectExercise = new EventEmitter<number>();
+  @Output() delete = new EventEmitter<number>();
 
   onSelectExercise(id: number): void {
     this.selectExercise.emit(id);
+  }
+
+  onDelete(id: number): void {
+    this.delete.emit(id);
   }
 }
