@@ -29,6 +29,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
 
 const MODULES = [
   MatSidenavModule,
@@ -61,6 +62,7 @@ const MODULES = [
   DragDropModule,
   MatExpansionModule,
   MatSlideToggleModule,
+  NgxMatTimepickerModule,
 ];
 
 @NgModule({

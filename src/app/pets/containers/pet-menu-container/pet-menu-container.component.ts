@@ -30,6 +30,14 @@ export class PetMenuContainerComponent {
       .then();
   }
 
+  onGoToFoodReminders(): void {
+    this.router
+      .navigate([`reminders/${this.petId}`], {
+        relativeTo: this.activatedRoute.parent,
+      })
+      .then();
+  }
+
   onBack(): void {
     this.router
       .navigate([`list`], {

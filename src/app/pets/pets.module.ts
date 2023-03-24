@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DecimalPipe } from '@angular/common';
 import { PetsPageComponent } from './containers/pets-page/pets-page.component';
 import { PetsRoutingModule } from './pets-routing.module';
 import { PetsListComponent } from './components/pets-list/pets-list.component';
@@ -28,6 +28,12 @@ import { AddExerciseComponent } from './components/add-exercise/add-exercise.com
 import { ExerciseDetailsContainerComponent } from './containers/exercise-details-container/exercise-details-container.component';
 import { ExerciseDetailsComponent } from './components/exercise-details/exercise-details.component';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { RemindersListContainerComponent } from './containers/reminders-list-container/reminders-list-container.component';
+import { RemindersFacades } from './facades/reminders.facades';
+import { RemindersService } from './services/reminders.service';
+import { RemindersListComponent } from './components/reminders-list/reminders-list.component';
+import { AddReminderContainerComponent } from './containers/add-reminder-container/add-reminder-container.component';
+import { AddReminderComponent } from './components/add-reminder/add-reminder.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +54,10 @@ import { GoogleMapsModule } from '@angular/google-maps';
     AddExerciseComponent,
     ExerciseDetailsContainerComponent,
     ExerciseDetailsComponent,
+    RemindersListContainerComponent,
+    RemindersListComponent,
+    AddReminderContainerComponent,
+    AddReminderComponent,
   ],
   imports: [
     ReactiveFormsModule,
@@ -63,6 +73,9 @@ import { GoogleMapsModule } from '@angular/google-maps';
     TutorialsService,
     ExercisesService,
     ExercisesFacades,
+    RemindersFacades,
+    RemindersService,
+    DecimalPipe,
   ],
 })
 export class PetsModule {}

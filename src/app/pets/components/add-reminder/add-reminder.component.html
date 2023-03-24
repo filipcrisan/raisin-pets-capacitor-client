@@ -1,0 +1,30 @@
+<div class="flex flex-col justify-center items-center w-full h-full">
+  <button mat-icon-button (click)="onBack()" class="self-end">
+    <img src="assets/icons/back.png" class="w-9 h-9">
+  </button>
+
+  <div *ngIf="!saving && !error" class="w-full max-w-sm">
+    <form [formGroup]="reminderForm">
+      <div class="flex flex-col items-start h-full w-full">
+        <span>Set reminder everyday at</span>
+        <mat-form-field class="w-full">
+          <input matInput formControlName="time" [ngxMatTimepicker]="picker" [format]="24">
+          <ngx-mat-timepicker #picker></ngx-mat-timepicker>
+        </mat-form-field>
+        <span>Description</span>
+        <mat-form-field class="w-full">
+          <input matInput formControlName="body">
+        </mat-form-field>
+      </div>
+    </form>
+
+    <div class="buttonContainer">
+      <button (click)="onSave()" class="flex flex-row m-1 justify-between">
+        <img src="assets/icons/save.png" class="ml-2 w-9 h-9 m-auto">
+        <span class="ml-1 m-auto">Save details</span>
+      </button>
+    </div>
+  </div>
+
+  <mat-progress-spinner *ngIf="saving || error" mode="indeterminate" class="mt-10 m-auto"></mat-progress-spinner>
+</div>

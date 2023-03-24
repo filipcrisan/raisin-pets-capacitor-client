@@ -1,0 +1,61 @@
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
+import { DecimalPipe } from '@angular/common';
+import { Reminder } from '../../models/reminder.model';
+import { FormControl, FormGroup } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
+
+@Component({
+  selector: 'app-add-reminder',
+  templateUrl: './add-reminder.component.html',
+  styleUrls: ['./add-reminder.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class AddReminderComponent {
+  @Input() saving: boolean;
+  @Input() error: HttpErrorResponse;
+
+  @Output() addReminder = new EventEmitter<Reminder>();
+  @Output() back = new EventEmitter<void>();
+
+  reminderForm = new FormGroup({
+    body: new FormControl(''),
+    time: new FormControl(''),
+  });
+
+  constructor(private decimalPipe: DecimalPipe) {}
+
+  onBack(): void {
+    this.back.emit();
+  }
+
+  onSave(): void {
+    if (!this.reminderForm.valid) {
+      return;
+    }
+
+    const reminder: Reminder = {
+      id: 0,
+      title: `It's ${this.time}!`,
+      body: this.body,
+      hours: +this.time.split(':')[0],
+      minutes: +this.time.split(':')[1],
+      enabled: true,
+    };
+
+    this.addReminder.emit(reminder);
+  }
+
+  get body(): string {
+    return this.reminderForm.controls.body.value;
+  }
+
+  get time(): string {
+    return this.reminderForm.controls.time.value;
+  }
+}
