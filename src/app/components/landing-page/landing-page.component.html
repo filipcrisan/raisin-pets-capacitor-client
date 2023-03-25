@@ -1,4 +1,4 @@
-<div class="flex flex-col w-full h-full overflow-auto">
+<div class="flex flex-col w-full h-full">
   <div *ngIf="!userLoading && !userError">
     <img src="/assets/images/logo-raisin-purple.png" class="w-20 h-20 mt-5 mb-10 m-auto">
     <div class="m-auto text-center">
@@ -11,10 +11,10 @@
           <mat-icon svgIcon="google-logo" class="m-auto"></mat-icon>
         </button>
       </div>
-
-      <img src="/assets/images/landing-page.gif" class="m-auto">
     </div>
   </div>
+
+  <img *ngIf="!userLoading && !userError" src="/assets/images/landing-page.png" class="mainImage mx-16 my-8 flex-grow">
 
   <div *ngIf="userLoading || userError" class="m-auto">
     <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
