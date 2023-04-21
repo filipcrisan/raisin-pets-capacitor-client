@@ -11,6 +11,8 @@ const config: CapacitorConfig = {
       iosClientId:
         '934410184091-hcbtachkju0mm550j2dpv2qp5fpcddm1.apps.googleusercontent.com',
       forceCodeForRefreshToken: true,
+      androidClientId:
+        '934410184091-c2c7tavjvscau815l48a7uemu1c26fam.apps.googleusercontent.com',
     },
   },
   ios: {
