@@ -22,6 +22,7 @@ export class ExerciseDetailsComponent implements OnChanges {
   @Input() exercise: Exercise;
   @Input() loading: boolean;
   @Input() error: HttpErrorResponse;
+  @Input() isGoogleMapsApiLoaded: boolean;
 
   @Output() back = new EventEmitter<void>();
 
@@ -37,12 +38,20 @@ export class ExerciseDetailsComponent implements OnChanges {
 
   ngOnChanges(changes: NgChanges<ExerciseDetailsComponent>): void {
     if (changes.exercise?.currentValue) {
-      this.vertices = this.exercise.checkpoints?.map((x) => ({
+      const checkpoints = ([...this.exercise.checkpoints] ?? []).sort(
+        (a, b) => a.timestamp.valueOf() - b.timestamp.valueOf()
+      );
+
+      this.vertices = checkpoints.map((x) => ({
         lat: x.latitude,
         lng: x.longitude,
       }));
 
-      this.onVerticesChanges();
+      this.refreshMap();
+    }
+
+    if (changes.isGoogleMapsApiLoaded?.currentValue) {
+      this.refreshMap();
     }
   }
 
@@ -50,7 +59,11 @@ export class ExerciseDetailsComponent implements OnChanges {
     this.back.emit();
   }
 
-  private onVerticesChanges(): void {
+  private refreshMap(): void {
+    if (!this.isGoogleMapsApiLoaded) {
+      return;
+    }
+
     const bounds = new google.maps.LatLngBounds();
 
     this.vertices.forEach((marker: any) => {

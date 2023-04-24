@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Exercise } from '../models/exercise.model';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable()
 export class ExercisesService {
@@ -25,5 +26,20 @@ export class ExercisesService {
     return this.http.delete<Exercise>(
       `${this.apiUrl}/${petId}/exercises/${exerciseId}`
     );
+  }
+
+  isGoogleMapsApiLoaded(): Observable<boolean> {
+    return this.http
+      .jsonp(
+        'https://maps.googleapis.com/maps/api/js?key=AIzaSyCqYxBHkSb43EaeKS3U1MJ54_htPSFVj4E',
+        'callback'
+      )
+      .pipe(
+        map(() => true),
+        catchError((e) => {
+          console.log(e);
+          return of(false);
+        })
+      );
   }
 }

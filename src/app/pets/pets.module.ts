@@ -34,6 +34,7 @@ import { RemindersService } from './services/reminders.service';
 import { RemindersListComponent } from './components/reminders-list/reminders-list.component';
 import { AddReminderContainerComponent } from './containers/add-reminder-container/add-reminder-container.component';
 import { AddReminderComponent } from './components/add-reminder/add-reminder.component';
+import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,8 @@ import { AddReminderComponent } from './components/add-reminder/add-reminder.com
     SharedModule,
     StoreModule.forFeature(featureKey, reducers),
     GoogleMapsModule,
+    HttpClientModule,
+    HttpClientJsonpModule,
   ],
   providers: [
     PetsFacades,

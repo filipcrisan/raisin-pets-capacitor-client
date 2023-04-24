@@ -8,6 +8,10 @@ export class AuthInterceptorService {
   constructor(private authFacades: AuthFacades, private router: Router) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
+    if (req.method == 'JSONP') {
+      return next.handle(req);
+    }
+
     const token = this.authFacades.getBearerToken();
 
     if (token == null) {

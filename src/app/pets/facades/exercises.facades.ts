@@ -7,7 +7,6 @@ import { petsQuery } from '../reducers/pets.selector';
 import { ExercisesService } from '../services/exercises.service';
 import { Exercise } from '../models/exercise.model';
 import { ToastrService } from 'ngx-toastr';
-import { Reminder } from '../models/reminder.model';
 
 @Injectable()
 export class ExercisesFacades {
@@ -81,5 +80,9 @@ export class ExercisesFacades {
 
   clearExercises(): void {
     this.store.dispatch(PetsPageActions.clearExercises());
+  }
+
+  isGoogleMapsApiLoaded(): Observable<boolean> {
+    return this.exercisesService.isGoogleMapsApiLoaded();
   }
 }

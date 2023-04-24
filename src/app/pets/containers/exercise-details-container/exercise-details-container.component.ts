@@ -17,6 +17,7 @@ export class ExerciseDetailsContainerComponent {
   exercise$ = this.exercisesQuery.entities$.pipe(
     map((x) => x.find((y) => y.id === this.exerciseId))
   );
+  isGoogleMapsApiLoaded$ = this.exercisesFacades.isGoogleMapsApiLoaded();
 
   constructor(
     private exercisesFacades: ExercisesFacades,

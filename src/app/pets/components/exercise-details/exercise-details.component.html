@@ -5,11 +5,13 @@
 
   <ng-container *ngIf="exercise && !loading && !error">
     <span class="text-2xl">#{{exercise.id}} {{exercise.name}}</span>
-    <span class="text-xl">Total distance: {{exercise.totalDistance | number}}</span>
-    <span class="text-xl">Average speed: {{exercise.averageSpeed | number}}</span>
+    <span class="text-xl">Total distance: {{exercise.totalDistance | number}} km</span>
+    <span class="text-xl">Average speed: {{exercise.averageSpeed | number}} km/h</span>
 
-    <google-map #googleMap [options]="options" [width]="350" [height]="350">
-      <map-polyline [path]="vertices"></map-polyline>
-    </google-map>
+    <ng-container *ngIf="isGoogleMapsApiLoaded">
+      <google-map #googleMap [options]="options" [width]="350" [height]="350">
+        <map-polyline [path]="vertices"></map-polyline>
+      </google-map>
+    </ng-container>
   </ng-container>
 </div>
