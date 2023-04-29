@@ -39,12 +39,24 @@ export class AddReminderComponent {
       return;
     }
 
+    const hours = +this.time.split(':')[0];
+    const minutes = +this.time.split(':')[1];
+
+    const startAt = new Date();
+    startAt.setHours(hours);
+    startAt.setMinutes(minutes);
+    startAt.setMilliseconds(0);
+
+    if (startAt.getTime() < new Date().getTime()) {
+      return;
+    }
+
     const reminder: Reminder = {
       id: 0,
       title: `It's ${this.time}!`,
       body: this.body,
-      hours: +this.time.split(':')[0],
-      minutes: +this.time.split(':')[1],
+      hours: hours,
+      minutes: minutes,
       enabled: true,
     };
 
