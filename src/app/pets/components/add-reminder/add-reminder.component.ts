@@ -5,7 +5,6 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { DecimalPipe } from '@angular/common';
 import { Reminder } from '../../models/reminder.model';
 import { FormControl, FormGroup } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -27,8 +26,6 @@ export class AddReminderComponent {
     body: new FormControl(''),
     time: new FormControl(''),
   });
-
-  constructor(private decimalPipe: DecimalPipe) {}
 
   onBack(): void {
     this.back.emit();
