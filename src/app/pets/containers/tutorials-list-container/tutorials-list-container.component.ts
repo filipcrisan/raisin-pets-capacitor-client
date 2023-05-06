@@ -36,10 +36,13 @@ export class TutorialsListContainerComponent
   }
 
   onGetTutorials(category: TutorialCategory): void {
+    console.log('Start list: ', performance.now());
     this.petsFacades
       .getTutorialsByCategory(this.petId, category)
       .pipe(untilDestroyed(this))
-      .subscribe();
+      .subscribe(() => {
+        console.log('End list: ', performance.now());
+      });
   }
 
   ngOnDestroy(): void {

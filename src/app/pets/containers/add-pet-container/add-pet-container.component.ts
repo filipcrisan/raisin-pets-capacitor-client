@@ -26,12 +26,14 @@ export class AddPetContainerComponent {
   ) {}
 
   onAddPet(pet: Pet): void {
+    console.log('Start add: ', performance.now());
     this.petsFacades
       .addPet(pet)
       .pipe(
         untilDestroyed(this),
         tap({
           next: () => {
+            console.log('End add: ', performance.now());
             this.router
               .navigate(['list'], {
                 relativeTo: this.activatedRoute.parent,
