@@ -1,4 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+} from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ExercisesFacades } from '../../facades/exercises.facades';
@@ -13,7 +17,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./exercises-list-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ExercisesListContainerComponent {
+export class ExercisesListContainerComponent implements AfterViewInit {
   exercisesQuery = this.exercisesFacades.query.exercises;
 
   petId!: number;
@@ -32,6 +36,10 @@ export class ExercisesListContainerComponent {
       .getAllExercises(this.petId)
       .pipe(untilDestroyed(this))
       .subscribe();
+  }
+
+  ngAfterViewInit(): void {
+    console.log('Exercises list: ', performance.now());
   }
 
   onAddExercise(): void {

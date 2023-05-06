@@ -1,4 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+} from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { LocalNotificationsService } from '../../../shared/services/local-notifications.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -14,7 +18,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./reminders-list-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RemindersListContainerComponent {
+export class RemindersListContainerComponent implements AfterViewInit {
   remindersQuery = this.remindersFacades.query.reminders;
 
   petId!: number;
@@ -38,6 +42,10 @@ export class RemindersListContainerComponent {
 
   ngOnDestroy(): void {
     this.remindersFacades.clearReminders();
+  }
+
+  ngAfterViewInit(): void {
+    console.log('Reminders list: ', performance.now());
   }
 
   onAddReminder(): void {
