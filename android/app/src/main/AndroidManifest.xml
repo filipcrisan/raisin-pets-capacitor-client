@@ -10,6 +10,7 @@
     android:supportsRtl="true"
     android:theme="@style/AppTheme">
 
+    <profileable android:shell="true"/>
     <activity
       android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode"
       android:name="com.raisinpets.app.MainActivity"
@@ -32,7 +33,7 @@
       android:grantUriPermissions="true">
       <meta-data
         android:name="android.support.FILE_PROVIDER_PATHS"
-        android:resource="@xml/file_paths"></meta-data>
+        android:resource="@xml/file_paths"/>
     </provider>
   </application>
 
