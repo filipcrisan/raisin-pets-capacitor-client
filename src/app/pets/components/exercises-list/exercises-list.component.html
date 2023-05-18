@@ -1,9 +1,10 @@
-<div class="flex flex-col justify-center items-center w-full h-full">
+<div class="flex flex-col justify-center items-center w-full h-full pt-2">
   <div *ngIf="!loading && !error" class="wrapper">
     <div *ngFor="let exercise of exercises">
       <div class="flex flex-row justify-between items-center">
-        <div class="flex flex-row justify-between items-center" (click)="onSelectExercise(exercise.id)">
-          <span class="text-left">#{{exercise.id}} {{exercise.name}}</span>
+        <div class="flex flex-row items-center w-72" (click)="onSelectExercise(exercise.id)">
+          <span class="text-2xl text-left">#{{exercise.id}} </span>
+          <span class="ml-3.5">{{exercise.name}}</span>
         </div>
         <button
           [matMenuTriggerFor]="exercisesActions"
@@ -17,6 +18,7 @@
           </button>
         </mat-menu>
       </div>
+      <hr>
     </div>
   </div>
 

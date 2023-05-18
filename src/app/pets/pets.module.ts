@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule, DecimalPipe } from '@angular/common';
+import { CommonModule, DecimalPipe, NgOptimizedImage } from '@angular/common';
 import { PetsPageComponent } from './containers/pets-page/pets-page.component';
 import { PetsRoutingModule } from './pets-routing.module';
 import { PetsListComponent } from './components/pets-list/pets-list.component';
@@ -69,6 +69,7 @@ import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
     GoogleMapsModule,
     HttpClientModule,
     HttpClientJsonpModule,
+    NgOptimizedImage,
   ],
   providers: [
     PetsFacades,

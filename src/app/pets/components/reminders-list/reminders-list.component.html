@@ -1,9 +1,12 @@
-<div class="flex justify-center items-center w-full h-full">
+<div class="flex justify-center items-center w-full h-full pt-2">
   <div *ngIf="!loading && !error" class="wrapper">
     <div *ngFor="let reminder of reminders">
       <div class="flex flex-row justify-between items-center">
-        <span
-          class="text-left">{{(reminder.hours | number:'2.0') + ':' + (reminder.minutes | number:'2.0') + ', ' + reminder.body}}</span>
+        <div class="flex flex-row items-center w-72">
+          <span
+            class="text-left text-2xl">{{(reminder.hours | number:'2.0') + ':' + (reminder.minutes | number:'2.0')}}</span>
+          <span class="ml-3.5">{{reminder.body}}</span>
+        </div>
         <button
           [matMenuTriggerFor]="petsActions"
           class="flex flex-row m-1 justify-between"
@@ -16,6 +19,7 @@
           </button>
         </mat-menu>
       </div>
+      <hr>
     </div>
   </div>
 

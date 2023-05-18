@@ -4,11 +4,14 @@
   border-width: 2px;
   --tw-border-opacity: 1;
   border-color: rgb(0 0 0 / var(--tw-border-opacity));
-  margin: auto;
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin: 0;
+  margin-top: 0;
 }
 
 .menuContainer {
   height: calc(100% - 58px);
+}
+
+p {
+  margin-bottom: 5px !important;
 }

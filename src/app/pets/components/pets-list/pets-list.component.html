@@ -1,14 +1,14 @@
-<div class="flex justify-center items-center w-full h-full">
+<div class="flex justify-center items-center w-full h-full pt-5">
   <div *ngIf="!loading && !error" class="wrapper">
     <div *ngFor="let pet of pets">
       <div class="flex flex-row justify-between items-center">
         <div class="flex flex-row justify-between items-center" (click)="onSelectPet(pet.id)">
           <img [src]="getAvatarUrlOrDefault(pet)" class="w-20 h-20">
-          <span class="text-left">{{pet.name}}</span>
+          <span class="ml-1 text-left">{{pet.name}}</span>
         </div>
         <button
           [matMenuTriggerFor]="petsActions"
-          class="flex flex-row m-1 justify-between"
+          class="flex flex-row m-1 mr-2 justify-between"
         >
           <img src="assets/icons/context-menu.png" class="ml-2 w-9 h-9 m-auto">
         </button>
@@ -21,6 +21,7 @@
           </button>
         </mat-menu>
       </div>
+      <hr>
     </div>
   </div>
 

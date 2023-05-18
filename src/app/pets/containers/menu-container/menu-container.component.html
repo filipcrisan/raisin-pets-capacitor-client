@@ -9,13 +9,13 @@
       <img src="/assets/images/logo-raisin-purple.png" class="w-10 h-10">
     </div>
   </div>
-  <div class="flex flex-col justify-between items-center pt-2.5 menuContainer">
+  <div class="flex flex-col justify-center items-center pt-2.5 menuContainer">
     <ng-container *ngIf="(authQuery.userLoading$ | async) === false && (authQuery.userError$ | async) === null">
-      <p>You are currently logged in as <i>{{(authQuery.user$ | async).firstName}}</i>.</p>
+      <p>Goodbye, {{(authQuery.user$ | async).firstName}}!</p>
     </ng-container>
     <div class="buttonContainer">
       <button (click)="onLogout()" class="flex flex-row m-1 justify-between">
-        <img src="assets/icons/logout.png" class="ml-2 w-9 h-9 m-auto">
+        <img src="assets/icons/logout.png" class="ml-2 w-9 h-9 m-auto" height="48" width="48">
         <span class="ml-1 m-auto">Logout</span>
       </button>
     </div>

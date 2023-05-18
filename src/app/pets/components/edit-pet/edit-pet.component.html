@@ -3,7 +3,7 @@
     <img src="assets/icons/back.png" class="w-9 h-9">
   </button>
 
-  <div *ngIf="!saving && !error" class="w-full max-w-sm">
+  <div *ngIf="!saving && !error" class="w-full max-w-sm px-10">
     <div class="buttonContainer m-2">
       <button (click)="onChangeAvatar()" class="flex flex-row m-1 justify-between">
         <img src="assets/icons/camera.png" class="ml-2 w-9 h-9 m-auto">
@@ -11,27 +11,27 @@
       </button>
     </div>
 
-    <div *ngIf="avatarInBase64" class="m-2">
-      <img [src]="avatarInBase64">
+    <div *ngIf="avatarInBase64" class="flex flex-row justify-center">
+      <img [src]="avatarInBase64" class="px-5 h-40 w-40">
     </div>
 
     <form [formGroup]="petForm">
       <div class="flex flex-col items-start h-full w-full">
         <span>Name</span>
-        <mat-form-field class="w-full">
+        <mat-form-field subscriptSizing="dynamic" class="w-full mb-1">
           <input matInput formControlName="name">
           <mat-error *ngIf="petForm.touched && petForm.controls.name.errors">
             Name is required
           </mat-error>
         </mat-form-field>
         <span>Date of birth (approx.)</span>
-        <mat-form-field appearance="fill" class="w-full">
+        <mat-form-field subscriptSizing="dynamic" appearance="fill" class="w-full mb-1">
           <input matInput [matDatepicker]="picker" formControlName="dateOfBirth">
           <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
         <span>Species</span>
-        <mat-form-field appearance="fill" class="w-full">
+        <mat-form-field subscriptSizing="dynamic" appearance="fill" class="w-full mb-1">
           <mat-select formControlName="species">
             <mat-option *ngFor="let option of speciesOptions" [value]="option.value">
               {{option.name}}
@@ -39,7 +39,7 @@
           </mat-select>
         </mat-form-field>
         <span>Size</span>
-        <mat-form-field appearance="fill" class="w-full">
+        <mat-form-field subscriptSizing="dynamic" appearance="fill" class="w-full">
           <mat-select formControlName="size">
             <mat-option *ngFor="let option of sizeOptions" [value]="option.value">
               {{option.name}}
