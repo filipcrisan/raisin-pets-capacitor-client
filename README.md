@@ -1,27 +1,42 @@
-# RaisinPetsCapacitorClient
+![raisin-pets-logo](./images/logo-raisin-purple.png?raw=true "Logo")
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.0.
+## about
+This is the Capacitor client implementation of the raisin' pets application.
 
-## Development server
+## build, sync & run
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+The first necessary step is building the application, which is straight-forward, both on iOS and Android. Then, each used project platform has to be synched with the latest build. For actually running the application, a proper device should be plugged into your computer, or a simulator can be used alternatively.
 
-## Code scaffolding
+If using a simulator, certain features might not work, due to the simulator's limitations.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### build
 
-## Build
+For building (both on iOS and Android), run the following command:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```
+ng build
+```
 
-## Running unit tests
+### sync
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+For syncing the projects (both iOS and Android), run the following command:
 
-## Running end-to-end tests
+```
+npx cap sync
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### run iOS
 
-## Further help
+For starting the application, run the following command:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```
+npx cap run ios
+```
+
+### run Android
+
+For starting the application, run the following command:
+
+```
+npx cap run android
+```
