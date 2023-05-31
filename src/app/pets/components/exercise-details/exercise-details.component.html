@@ -9,8 +9,8 @@
     <span class="text-xl">Average speed: {{exercise.averageSpeed | number}} km/h</span>
 
     <ng-container *ngIf="isGoogleMapsApiLoaded">
-      <google-map #googleMap [options]="options" [width]="350" [height]="350">
-        <map-polyline [path]="vertices"></map-polyline>
+      <google-map #googleMap [options]="mapOptions" [width]="350" [height]="350">
+        <map-polyline [path]="vertices" [options]="polylineOptions"></map-polyline>
       </google-map>
     </ng-container>
   </ng-container>

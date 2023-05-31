@@ -27,11 +27,16 @@ export class ExerciseDetailsComponent implements OnChanges {
   @Output() back = new EventEmitter<void>();
 
   vertices: google.maps.LatLngLiteral[] = [];
-  options: google.maps.MapOptions = {
+  mapOptions: google.maps.MapOptions = {
     fullscreenControl: false,
     streetViewControl: false,
     zoomControl: false,
     mapTypeControl: false,
+  };
+  polylineOptions = {
+    strokeColor: '#32a1d0',
+    strokeOpacity: 1.0,
+    strokeWeight: 20,
   };
 
   @ViewChild('googleMap') googleMap: GoogleMap;
@@ -72,8 +77,8 @@ export class ExerciseDetailsComponent implements OnChanges {
 
     this.googleMap?.fitBounds(bounds);
 
-    this.options = {
-      ...this.options,
+    this.mapOptions = {
+      ...this.mapOptions,
       center: {
         lat: bounds.getCenter().lat(),
         lng: bounds.getCenter().lng(),
