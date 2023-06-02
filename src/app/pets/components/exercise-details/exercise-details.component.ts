@@ -32,11 +32,12 @@ export class ExerciseDetailsComponent implements OnChanges {
     streetViewControl: false,
     zoomControl: false,
     mapTypeControl: false,
+    zoom: 16,
   };
   polylineOptions = {
     strokeColor: '#32a1d0',
     strokeOpacity: 1.0,
-    strokeWeight: 20,
+    strokeWeight: 10,
   };
 
   @ViewChild('googleMap') googleMap: GoogleMap;
@@ -51,13 +52,9 @@ export class ExerciseDetailsComponent implements OnChanges {
         lat: x.latitude,
         lng: x.longitude,
       }));
-
-      this.refreshMap();
     }
 
-    if (changes.isGoogleMapsApiLoaded?.currentValue) {
-      this.refreshMap();
-    }
+    this.refreshMap();
   }
 
   onBack(): void {
@@ -79,10 +76,7 @@ export class ExerciseDetailsComponent implements OnChanges {
 
     this.mapOptions = {
       ...this.mapOptions,
-      center: {
-        lat: bounds.getCenter().lat(),
-        lng: bounds.getCenter().lng(),
-      },
+      center: bounds.getCenter(),
     };
   }
 }
