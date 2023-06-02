@@ -15,9 +15,6 @@ const config: CapacitorConfig = {
         '934410184091-c2c7tavjvscau815l48a7uemu1c26fam.apps.googleusercontent.com',
     },
   },
-  ios: {
-    contentInset: 'always',
-  },
 };
 
 export default config;
