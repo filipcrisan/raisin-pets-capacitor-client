@@ -39,6 +39,10 @@ export class ExerciseDetailsComponent implements OnChanges {
     strokeOpacity: 1.0,
     strokeWeight: 10,
   };
+  mapDimensions = {
+    width: 350,
+    height: 350,
+  };
 
   @ViewChild('googleMap') googleMap: GoogleMap;
 
@@ -66,17 +70,59 @@ export class ExerciseDetailsComponent implements OnChanges {
       return;
     }
 
+    const bounds = this.getBounds();
+    const zoom = this.getZoomLevel(bounds);
+
+    this.mapOptions = {
+      ...this.mapOptions,
+      center: bounds.getCenter(),
+      zoom,
+    };
+  }
+
+  private getBounds(): google.maps.LatLngBounds {
     const bounds = new google.maps.LatLngBounds();
 
     this.vertices.forEach((marker: any) => {
       bounds.extend(new google.maps.LatLng(marker.lat, marker.lng));
     });
 
-    this.googleMap?.fitBounds(bounds);
+    return bounds;
+  }
 
-    this.mapOptions = {
-      ...this.mapOptions,
-      center: bounds.getCenter(),
-    };
+  private getZoomLevel(bounds: google.maps.LatLngBounds): number {
+    const WORLD_DIM = { height: 256, width: 256 };
+    const ZOOM_MAX = 21;
+
+    function latRad(lat: number) {
+      const sin = Math.sin((lat * Math.PI) / 180);
+      const radX2 = Math.log((1 + sin) / (1 - sin)) / 2;
+      return Math.max(Math.min(radX2, Math.PI), -Math.PI) / 2;
+    }
+
+    function zoom(mapPx: number, worldPx: number, fraction: number) {
+      return Math.floor(Math.log(mapPx / worldPx / fraction) / Math.LN2);
+    }
+
+    const ne = bounds.getNorthEast();
+    const sw = bounds.getSouthWest();
+
+    const latFraction = (latRad(ne.lat()) - latRad(sw.lat())) / Math.PI;
+
+    const lngDiff = ne.lng() - sw.lng();
+    const lngFraction = (lngDiff < 0 ? lngDiff + 360 : lngDiff) / 360;
+
+    const latZoom = zoom(
+      this.mapDimensions.height,
+      WORLD_DIM.height,
+      latFraction
+    );
+    const lngZoom = zoom(
+      this.mapDimensions.width,
+      WORLD_DIM.width,
+      lngFraction
+    );
+
+    return Math.min(latZoom, lngZoom, ZOOM_MAX);
   }
 }
