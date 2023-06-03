@@ -15,6 +15,8 @@ import { Position } from '@capacitor/geolocation';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddExerciseContainerComponent {
+  exercisesQuery = this.exercisesFacades.query.exercises;
+
   petId!: number;
   watchId: string = null;
   locations: Position[] = [];

@@ -1,5 +1,7 @@
 <app-add-exercise
   [watchId]="watchId$ | async"
+  [saving]="exercisesQuery.saving$ | async"
+  [error]="exercisesQuery.error$ | async"
   (exerciseChanged)="onExerciseChanged()"
   (back)="onBack()"
 ></app-add-exercise>
