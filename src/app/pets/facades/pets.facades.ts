@@ -18,6 +18,7 @@ export class PetsFacades {
     pets: {
       entities$: this.store.select(petsQuery.getPets),
       loading$: this.store.select(petsQuery.getPetsLoading),
+      loaded$: this.store.select(petsQuery.getPetsLoaded),
       error$: this.store.select(petsQuery.getPetsError),
       saving$: this.store.select(petsQuery.getPetsSaving),
     },

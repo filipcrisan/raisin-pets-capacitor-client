@@ -1,5 +1,5 @@
 <div class="flex justify-center items-center w-full h-full pt-5">
-  <div *ngIf="!loading && !error" class="wrapper">
+  <div *ngIf="!loading && loaded && !error" class="wrapper">
     <div *ngFor="let pet of pets">
       <div class="flex flex-row justify-between items-center">
         <div class="flex flex-row justify-between items-center" (click)="onSelectPet(pet.id)">
@@ -23,9 +23,11 @@
       </div>
       <hr>
     </div>
+
+    <p *ngIf="!pets.length" class="text-2xl mt-10 m-auto">No pets to display.</p>
   </div>
 
-  <mat-progress-spinner *ngIf="loading || error" mode="indeterminate" class="mt-10 m-auto"></mat-progress-spinner>
-
-  <p *ngIf="!loading && !error && !pets.length" class="text-2xl mt-10 m-auto">No pets to display.</p>
+  <mat-progress-spinner *ngIf="loading && !error" mode="indeterminate"
+                        class="mt-10 m-auto"></mat-progress-spinner>
+  <p *ngIf="!loading && error" class="text-2xl mt-10 m-auto">Error! Try again.</p>
 </div>

@@ -19,6 +19,7 @@ import { Const } from '../../models/constants.model';
 export class PetsListComponent {
   @Input() pets: Pet[];
   @Input() loading: boolean;
+  @Input() loaded: boolean;
   @Input() error: HttpErrorResponse;
 
   @Output() editDetails = new EventEmitter<number>();

@@ -4,7 +4,7 @@ import { PetsFacades } from '../../facades/pets.facades';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../../../shared/components/confirmation-dialog/confirmation-dialog.component';
-import { filter, switchMap } from 'rxjs';
+import { distinctUntilChanged, filter, of, switchMap } from 'rxjs';
 
 @UntilDestroy()
 @Component({
@@ -24,6 +24,17 @@ export class PetsListContainerComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.petsQuery.loaded$
+      .pipe(
+        untilDestroyed(this),
+        distinctUntilChanged(),
+        filter((loaded) => !loaded),
+        switchMap(() => this.petsFacades.getAllPets())
+      )
+      .subscribe();
+  }
+
+  onRefreshList(): void {
     this.petsFacades.getAllPets().pipe(untilDestroyed(this)).subscribe();
   }
 

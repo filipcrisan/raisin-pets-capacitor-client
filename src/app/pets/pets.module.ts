@@ -35,6 +35,7 @@ import { RemindersListComponent } from './components/reminders-list/reminders-li
 import { AddReminderContainerComponent } from './containers/add-reminder-container/add-reminder-container.component';
 import { AddReminderComponent } from './components/add-reminder/add-reminder.component';
 import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
+import { SharedFacades } from './facades/shared.facades';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
     RemindersFacades,
     RemindersService,
     DecimalPipe,
+    SharedFacades,
   ],
 })
 export class PetsModule {}
