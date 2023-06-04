@@ -2,7 +2,6 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
-  OnDestroy,
 } from '@angular/core';
 import { PetsFacades } from '../../facades/pets.facades';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -16,9 +15,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
   styleUrls: ['./tutorials-list-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TutorialsListContainerComponent
-  implements OnDestroy, AfterViewInit
-{
+export class TutorialsListContainerComponent implements AfterViewInit {
   tutorialsQuery = this.petsFacades.query.tutorials;
 
   petId!: number;
@@ -43,10 +40,6 @@ export class TutorialsListContainerComponent
       .subscribe(() => {
         console.log('End list: ', performance.now());
       });
-  }
-
-  ngOnDestroy(): void {
-    this.petsFacades.clearTutorials();
   }
 
   onBack(): void {

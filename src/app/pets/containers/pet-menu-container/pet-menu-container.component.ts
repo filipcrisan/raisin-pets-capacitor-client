@@ -2,8 +2,10 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  OnInit,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SharedFacades } from '../../facades/shared.facades';
 
 @Component({
   selector: 'app-pet-menu-container',
@@ -11,15 +13,23 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./pet-menu-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PetMenuContainerComponent implements AfterViewInit {
+export class PetMenuContainerComponent implements AfterViewInit, OnInit {
   petId!: number;
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router) {
+  constructor(
+    private sharedFacades: SharedFacades,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
+  ) {
     this.petId = +this.activatedRoute.snapshot.params['id'];
   }
 
   ngAfterViewInit(): void {
     console.log('Menu: ', performance.now());
+  }
+
+  ngOnInit(): void {
+    this.sharedFacades.clearPetDetails();
   }
 
   onGoToTutorials(): void {

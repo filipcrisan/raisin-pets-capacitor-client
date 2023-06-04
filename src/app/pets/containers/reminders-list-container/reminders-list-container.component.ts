@@ -40,10 +40,6 @@ export class RemindersListContainerComponent implements AfterViewInit {
       .subscribe();
   }
 
-  ngOnDestroy(): void {
-    this.remindersFacades.clearReminders();
-  }
-
   ngAfterViewInit(): void {
     console.log('Reminders list: ', performance.now());
   }

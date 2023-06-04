@@ -79,10 +79,6 @@ export class ExercisesFacades {
     );
   }
 
-  clearExercises(): void {
-    this.store.dispatch(PetsPageActions.clearExercises());
-  }
-
   isGoogleMapsApiLoaded(): Observable<boolean> {
     return this.exercisesService.isGoogleMapsApiLoaded();
   }

@@ -77,8 +77,4 @@ export class RemindersFacades {
       })
     );
   }
-
-  clearReminders(): void {
-    this.store.dispatch(PetsPageActions.clearReminders());
-  }
 }
