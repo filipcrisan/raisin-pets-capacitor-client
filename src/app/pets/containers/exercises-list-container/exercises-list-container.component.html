@@ -9,10 +9,14 @@
       <span class="ml-1 m-auto">Add exercise session</span>
     </button>
   </div>
+  <button mat-icon-button (click)="onRefreshList()">
+    <img width="48" height="48" src="https://img.icons8.com/dusk/64/replay.png" alt="replay"/>
+  </button>
 
   <app-exercises-list
     [exercises]="exercisesQuery.entities$ | async"
     [loading]="exercisesQuery.loading$ | async"
+    [loaded]="exercisesQuery.loaded$ | async"
     [error]="exercisesQuery.error$ | async"
     (selectExercise)="onSelectExercise($event)"
     (delete)="onDelete($event)"

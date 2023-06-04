@@ -7,7 +7,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ExercisesFacades } from '../../facades/exercises.facades';
 import { ConfirmationDialogComponent } from '../../../shared/components/confirmation-dialog/confirmation-dialog.component';
-import { filter, switchMap } from 'rxjs';
+import { distinctUntilChanged, filter, switchMap } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 
 @UntilDestroy()
@@ -32,6 +32,17 @@ export class ExercisesListContainerComponent implements AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.exercisesQuery.loaded$
+      .pipe(
+        untilDestroyed(this),
+        distinctUntilChanged(),
+        filter((loaded) => !loaded),
+        switchMap(() => this.exercisesFacades.getAllExercises(this.petId))
+      )
+      .subscribe();
+  }
+
+  onRefreshList(): void {
     this.exercisesFacades
       .getAllExercises(this.petId)
       .pipe(untilDestroyed(this))

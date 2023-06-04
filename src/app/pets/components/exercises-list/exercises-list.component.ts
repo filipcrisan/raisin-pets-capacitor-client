@@ -17,6 +17,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class ExercisesListComponent {
   @Input() exercises: Exercise[];
   @Input() loading: boolean;
+  @Input() loaded: boolean;
   @Input() error: HttpErrorResponse;
 
   @Output() selectExercise = new EventEmitter<number>();
