@@ -2,7 +2,7 @@
   <div *ngIf="!loading && loaded && !error" class="wrapper">
     <div *ngFor="let pet of pets">
       <div class="flex flex-row justify-between items-center">
-        <div class="flex flex-row justify-between items-center" (click)="onSelectPet(pet.id)">
+        <div class="flex flex-row items-center w-72" (click)="onSelectPet(pet.id)">
           <img [src]="getAvatarUrlOrDefault(pet)" class="w-20 h-20">
           <span class="ml-1 text-left">{{pet.name}}</span>
         </div>
