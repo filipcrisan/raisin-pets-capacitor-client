@@ -7,7 +7,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { LocalNotificationsService } from '../../../shared/services/local-notifications.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RemindersFacades } from '../../facades/reminders.facades';
-import { filter, switchMap, tap } from 'rxjs';
+import { distinctUntilChanged, filter, switchMap, tap } from 'rxjs';
 import { ConfirmationDialogComponent } from '../../../shared/components/confirmation-dialog/confirmation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -34,6 +34,17 @@ export class RemindersListContainerComponent implements AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.remindersQuery.loaded$
+      .pipe(
+        untilDestroyed(this),
+        distinctUntilChanged(),
+        filter((loaded) => !loaded),
+        switchMap(() => this.remindersFacades.getAllReminders(this.petId))
+      )
+      .subscribe();
+  }
+
+  onRefreshList(): void {
     this.remindersFacades
       .getAllReminders(this.petId)
       .pipe(untilDestroyed(this))

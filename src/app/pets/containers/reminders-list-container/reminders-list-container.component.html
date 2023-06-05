@@ -9,10 +9,14 @@
       <span class="ml-1 m-auto">Add reminder</span>
     </button>
   </div>
+  <button mat-icon-button (click)="onRefreshList()">
+    <img width="48" height="48" src="https://img.icons8.com/dusk/64/replay.png" alt="replay"/>
+  </button>
 
   <app-reminders-list
     [reminders]="remindersQuery.entities$ | async"
     [loading]="remindersQuery.loading$ | async"
+    [loaded]="remindersQuery.loaded$ | async"
     [error]="remindersQuery.error$ | async"
     (delete)="onDelete($event)"
   ></app-reminders-list>

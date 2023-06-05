@@ -17,6 +17,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class RemindersListComponent {
   @Input() reminders: Reminder[];
   @Input() loading: boolean;
+  @Input() loaded: boolean;
   @Input() error: HttpErrorResponse;
 
   @Output() delete = new EventEmitter<number>();
