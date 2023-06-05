@@ -42,8 +42,6 @@ export class AuthFacades {
   }
 
   logout(): void {
-    this.store.dispatch(AuthActions.clearState());
-
     GoogleAuth.signOut()
       .then(() => {
         this.onGoogleSignOut();
@@ -123,9 +121,11 @@ export class AuthFacades {
         next: () => {
           localStorage.removeItem('token');
           this.router.navigate(['']).then();
+          this.store.dispatch(AuthActions.clearState());
         },
         error: () => {
           localStorage.removeItem('token');
+          this.store.dispatch(AuthActions.clearState());
 
           this.toastr.error('Error upon logout. Please try again.');
         },

@@ -167,7 +167,7 @@ export const reducer = createReducer(
       error: null,
     },
   })),
-  on(PetsApiActions.getAllPetsFailure, (state, { error }) => ({
+  on(PetsApiActions.getTutorialsByCategoryFailure, (state, { error }) => ({
     ...state,
     tutorials: {
       ...state.tutorials,
