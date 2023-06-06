@@ -13,7 +13,7 @@ import { SharedFacades } from '../../facades/shared.facades';
   styleUrls: ['./pet-menu-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PetMenuContainerComponent implements AfterViewInit, OnInit {
+export class PetMenuContainerComponent implements AfterViewInit {
   petId!: number;
 
   constructor(
@@ -26,10 +26,6 @@ export class PetMenuContainerComponent implements AfterViewInit, OnInit {
 
   ngAfterViewInit(): void {
     console.log('Menu: ', performance.now());
-  }
-
-  ngOnInit(): void {
-    this.sharedFacades.clearPetDetails();
   }
 
   onGoToTutorials(): void {

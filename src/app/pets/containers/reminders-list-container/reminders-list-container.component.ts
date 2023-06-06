@@ -19,7 +19,7 @@ import { MatDialog } from '@angular/material/dialog';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RemindersListContainerComponent implements AfterViewInit {
-  remindersQuery = this.remindersFacades.query.reminders;
+  remindersQuery: any;
 
   petId!: number;
 
@@ -31,6 +31,7 @@ export class RemindersListContainerComponent implements AfterViewInit {
     private dialog: MatDialog
   ) {
     this.petId = +this.activatedRoute.snapshot.params['id'];
+    this.remindersQuery = this.remindersFacades.query(this.petId).reminders;
   }
 
   ngOnInit(): void {
