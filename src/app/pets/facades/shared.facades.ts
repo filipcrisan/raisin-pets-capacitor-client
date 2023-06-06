@@ -15,8 +15,8 @@ export class SharedFacades {
   }
 
   clearPetDetails(): void {
+    // TODO: remove this
     this.store.dispatch(PetsPageActions.clearTutorials());
-    this.store.dispatch(PetsPageActions.clearExercises());
     this.store.dispatch(PetsPageActions.clearReminders());
   }
 }

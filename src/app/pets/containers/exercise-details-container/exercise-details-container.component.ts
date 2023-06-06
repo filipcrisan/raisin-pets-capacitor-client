@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { map } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { ExercisesFacades } from '../../facades/exercises.facades';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { Exercise } from '../../models/exercise.model';
 
 @Component({
   selector: 'app-exercise-details-container',
@@ -11,12 +12,11 @@ import { Location } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ExerciseDetailsContainerComponent {
-  exercisesQuery = this.exercisesFacades.query.exercises;
+  exercisesQuery: any;
 
+  petId!: number;
   exerciseId!: number;
-  exercise$ = this.exercisesQuery.entities$.pipe(
-    map((x) => x.find((y) => y.id === this.exerciseId))
-  );
+  exercise$: Observable<Exercise>;
   isGoogleMapsApiLoaded$ = this.exercisesFacades.isGoogleMapsApiLoaded();
 
   constructor(
@@ -24,7 +24,12 @@ export class ExerciseDetailsContainerComponent {
     private activatedRoute: ActivatedRoute,
     private location: Location
   ) {
-    this.exerciseId = +this.activatedRoute.snapshot.params['id'];
+    this.petId = +this.activatedRoute.snapshot.params['petId'];
+    this.exerciseId = +this.activatedRoute.snapshot.params['exerciseId'];
+    this.exercisesQuery = this.exercisesFacades.query(this.petId).exercises;
+    this.exercise$ = this.exercisesQuery.entities$.pipe(
+      map((x: Exercise[]) => x.find((y) => y.id === this.exerciseId))
+    );
   }
 
   onBack(): void {

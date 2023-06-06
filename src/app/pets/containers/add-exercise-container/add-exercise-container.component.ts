@@ -15,7 +15,7 @@ import { Position } from '@capacitor/geolocation';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddExerciseContainerComponent {
-  exercisesQuery = this.exercisesFacades.query.exercises;
+  exercisesQuery: any;
 
   petId!: number;
   watchId: string = null;
@@ -30,6 +30,7 @@ export class AddExerciseContainerComponent {
     private router: Router
   ) {
     this.petId = +this.activatedRoute.snapshot.params['id'];
+    this.exercisesQuery = this.exercisesFacades.query(this.petId).exercises;
   }
 
   async ngOnDestroy() {

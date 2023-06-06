@@ -18,7 +18,7 @@ import { MatDialog } from '@angular/material/dialog';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ExercisesListContainerComponent implements AfterViewInit {
-  exercisesQuery = this.exercisesFacades.query.exercises;
+  exercisesQuery: any;
 
   petId!: number;
 
@@ -29,6 +29,7 @@ export class ExercisesListContainerComponent implements AfterViewInit {
     private dialog: MatDialog
   ) {
     this.petId = +this.activatedRoute.snapshot.params['id'];
+    this.exercisesQuery = this.exercisesFacades.query(this.petId).exercises;
   }
 
   ngOnInit(): void {
@@ -63,7 +64,7 @@ export class ExercisesListContainerComponent implements AfterViewInit {
 
   onSelectExercise(id: number): void {
     this.router
-      .navigate([`exercise/${id}/details`], {
+      .navigate([`pet/${this.petId}/exercise/${id}/details`], {
         relativeTo: this.activatedRoute.parent,
       })
       .then();
