@@ -2,16 +2,13 @@
   <div *ngIf="!loading && loaded && !error" class="wrapper">
     <div *ngFor="let reminder of reminders">
       <div class="flex flex-row justify-between items-center">
-        <div class="flex flex-row items-center w-72">
+        <div class="flex flex-auto flex-row items-center w-72">
           <span
             class="text-left text-2xl">{{(reminder.hours | number:'2.0') + ':' + (reminder.minutes | number:'2.0')}}</span>
-          <span class="ml-3.5">{{reminder.body}}</span>
+          <span class="ml-3.5 text-left truncate">{{reminder.body}}</span>
         </div>
-        <button
-          [matMenuTriggerFor]="petsActions"
-          class="flex flex-row m-1 justify-between"
-        >
-          <img src="assets/icons/context-menu.png" class="ml-2 w-9 h-9 m-auto">
+        <button [matMenuTriggerFor]="petsActions" class="w-9 h-9">
+          <img src="assets/icons/context-menu.png">
         </button>
         <mat-menu #petsActions="matMenu">
           <button mat-menu-item (click)="onDelete(reminder.id)">
