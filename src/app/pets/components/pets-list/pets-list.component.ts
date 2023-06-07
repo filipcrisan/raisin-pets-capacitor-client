@@ -3,12 +3,14 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnChanges,
   Output,
 } from '@angular/core';
 import { Pet } from '../../models/pet.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Species } from '../../models/species.model';
 import { Const } from '../../models/constants.model';
+import { NgChanges } from '../../../shared/models/simple-changes-typed';
 
 @Component({
   selector: 'app-pets-list',
@@ -16,7 +18,7 @@ import { Const } from '../../models/constants.model';
   styleUrls: ['./pets-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PetsListComponent {
+export class PetsListComponent implements OnChanges {
   @Input() pets: Pet[];
   @Input() loading: boolean;
   @Input() loaded: boolean;
@@ -25,6 +27,12 @@ export class PetsListComponent {
   @Output() editDetails = new EventEmitter<number>();
   @Output() delete = new EventEmitter<number>();
   @Output() selectPet = new EventEmitter<number>();
+
+  ngOnChanges(changes: NgChanges<PetsListComponent>): void {
+    if (changes.pets?.currentValue) {
+      this.pets = [...this.pets].sort((a, b) => a.id - b.id);
+    }
+  }
 
   onEditDetails(pet: Pet): void {
     this.editDetails.emit(pet.id);
